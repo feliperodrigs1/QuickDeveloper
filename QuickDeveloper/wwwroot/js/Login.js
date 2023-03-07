@@ -9,6 +9,6 @@ form.addEventListener("submit", function (event) {
     if (username === "" || password === "") {
         alert("Por favor, preencha todos os campos!");
     } else {
-        window.location.href = "Index.html";
+        window.location.href = '/';
     }
 });

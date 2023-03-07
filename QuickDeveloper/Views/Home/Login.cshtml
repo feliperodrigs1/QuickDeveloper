@@ -2,10 +2,15 @@
     Layout = null;
 }
 
-<link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
 
 <div class="container">
+    <a style="text-decoration: none" asp-area="" asp-controller="Home" asp-action="Index">
+        <h1><span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h1>
+    </a>
     <form id="login-form">
+        <h2>Bem-vindo de volta!</h2>
+        <br />
         <label for="username">Nome de usuário:</label>
         <input type="text" id="username" name="username" required>
 
@@ -16,4 +21,4 @@
     </form>
 </div>
 
-<script src="/js/Login.js"></script>
+<script src="/js/login.js"></script>

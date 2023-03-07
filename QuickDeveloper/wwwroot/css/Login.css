@@ -1,7 +1,17 @@
-﻿.container {
-    display: flex;
+﻿h1, h2 {
+    font-family: 'Quicksand', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 40px;
+}
+
+.container {
+    display: grid;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     height: 100vh;
 }
 
@@ -11,11 +21,13 @@
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 20px;
+    border-radius: 10px;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
 }
 
 input[type="text"], input[type="password"] {
@@ -27,7 +39,7 @@ input[type="text"], input[type="password"] {
 }
 
 button[type="submit"] {
-    background-color: #008CBA;
+    background-color: #303457;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -36,6 +48,6 @@ button[type="submit"] {
     transition: all 0.3s ease-in-out;
 }
 
-    button[type="submit"]:hover {
-        background-color: #006D9C;
-    }
+button[type="submit"]:hover {
+    background-color: #006D9C;
+}
