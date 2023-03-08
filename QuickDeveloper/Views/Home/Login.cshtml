@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="/css/login.css" asp-append-version="true" />
+<title>Login | QuickDeveloper</title>
+
+<div class="container">
+    <form id="login-form">
+        <h2>Bem-vindo(a) à <span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h2>
+        <br />
+        <label for="username">Nome de usuário:</label>
+        <input type="text" placeholder="Digite o seu nome de usuário" id="username" name="username" required>
+        <label for="password">Senha:</label>
+        <input type="password" placeholder="Digite a sua senha" id="password" name="password" required>
+        <br />
+        <button type="submit">Entrar</button>
+        <div class="remember-me">
+            <input type="checkbox" checked="checked"> Lembre de mim
+        </div>
+    </form>
+</div>
+<footer>
+    <p>Ainda não tem uma conta? <a href="#">Registre-se</a></p>
+</footer>
+
+<script src="/js/login.js"></script>

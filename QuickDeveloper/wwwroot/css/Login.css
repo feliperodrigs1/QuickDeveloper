@@ -1,0 +1,71 @@
+﻿body {
+    background-color: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+}
+
+.container {
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 90vh;
+}
+
+#login-form {
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    background-color: #303457;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    font-size: 16px
+}
+
+button[type="submit"]:hover {
+    background-color: #006D9C;
+}
+
+.remember-me {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input[type=checkbox] {
+    margin-right: 10px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
