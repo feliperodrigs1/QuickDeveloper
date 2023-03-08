@@ -14,7 +14,7 @@ h2 {
     display: grid;
     justify-content: center;
     align-content: center;
-    height: 100vh;
+    height: 90vh;
 }
 
 #login-form {
@@ -63,4 +63,9 @@ button[type="submit"]:hover {
 
 .remember-me input[type=checkbox] {
     margin-right: 10px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
 }
