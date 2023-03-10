@@ -23,7 +23,7 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Register()
         {
             return View();
         }
