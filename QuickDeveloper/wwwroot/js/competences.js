@@ -1,5 +1,5 @@
 ﻿const ul = document.querySelector("ul"),
-    input = document.querySelector("input"),
+    input = document.querySelector("input#competence"),
     tagNumb = document.querySelector(".details span");
 
 let maxTags = 10,

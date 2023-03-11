@@ -9,13 +9,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #303457;
-}
-
-.h2 {
-    font-family: 'QuickSand', sans-serif;
-    margin: 5px;
-    font-size: 18px;
+    background: #fff;
 }
 
 .p {
@@ -27,17 +21,47 @@ body {
     background: #303457;
 }
 
-.wrapper {
-    width: 496px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 18px 25px 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.06);
+.observation {
+    margin-bottom: 30px;
+}
+
+.observation .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.observation h2 {
+    font-size: 21px;
+    font-weight: 600;
+    font-family: 'QuickSand', sans-serif;
+}
+
+.observation textarea {
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+    padding: 7px;
+    width: 100%;
 }
 
 .wrapper :where(.title, li, li i, .details) {
     display: flex;
     align-items: center;
+}
+
+.wrapper:before {
+    content: "";
+    position: fixed;
+    height: 2000px;
+    width: 2000px;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    background-image: linear-gradient(-90deg, #303457 50%, #c6332c 75%);
+    transition: 1.8s ease-in-out;
+    border-radius: 50%;
+    z-index: -1;
 }
 
 .title img {
@@ -48,13 +72,15 @@ body {
     font-size: 21px;
     font-weight: 600;
     margin-left: 8px;
+    font-family: 'QuickSand', sans-serif;
 }
 
 .wrapper.content {
     margin: 10px 0;
 }
 
-.content p {
+.content label {
+    color: gray; 
     font-size: 15px;
 }
 
@@ -137,4 +163,12 @@ body {
 
 .btn:hover {
     background: #623348;
+}
+
+.container {
+    width: 496px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 25px 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }

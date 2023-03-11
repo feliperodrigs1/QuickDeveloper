@@ -11,25 +11,30 @@
 
 <html lang="pt-br">
     <body>
-        <div class="wrapper">
-            <div class="title">
-            <i class="fas fa-check"></i>
-                <h2>Cadastre suas competências!</h2>          
-            </div>
-            <br>
-            <div class="content">
-                <p>Pressione Enter para inserir</p>
+        <div class="container">
+            <div class="observation"><div class="title">
+                <i class="fas fa-code"></i>
+                <h2>Nos conte mais sobre você: </h2>
+            </div>                
+                <textarea class="form-control" rows="3" placeholder="Com observações detalhadas você tem maiores chances de ser contratado."></textarea>
+            </div>            
+            <div class="wrapper">
+                <div class="title">
+                    <i class="fas fa-check"></i>
+                    <h2>Cadastre suas competências!</h2>
+                </div>                
+                <div class="content">
+                    <label>Pressione Enter para inserir</label>
+                    <ul><input id="competence" type="text" spellcheck="false"></ul>
+                </div>
+                <div class="details">
+                    <p><span>10</span> competências restantes</p>
+                    <button>Remover tudo</button>
+                </div>
                 <br>
-                <ul><input id="competence" type="text" spellcheck="false"></ul>
-            </div>
-            <div class="details">
-                <p><span>10</span> competências restantes</p>
-                <br>
-                <button>Remover tudo</button>
-            </div>
-            <br>
-            <div class="btn-submit">
-                <input type="submit" class="btn" value="Enviar" onclick="window.location.href = '/'" />
+                <div class="btn-submit">
+                    <input type="submit" class="btn" value="Enviar informações" onclick="window.location.href = '/'" />
+                </div>
             </div>
         </div>
         <script src="/js/competences.js"></script>
