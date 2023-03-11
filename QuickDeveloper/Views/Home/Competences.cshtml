@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="/css/competences.css" asp-append-version="true" />
+<title>Competências | QuickDeveloper</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+<html lang="pt-br">
+    <body>
+        <div class="wrapper">
+            <div class="title">
+            <i class="fas fa-check"></i>
+                <h2>Cadastre suas competências!</h2>          
+            </div>
+            <br>
+            <div class="content">
+                <p>Pressione Enter para inserir</p>
+                <br>
+                <ul><input id="competence" type="text" spellcheck="false"></ul>
+            </div>
+            <div class="details">
+                <p><span>10</span> competências restantes</p>
+                <br>
+                <button>Remover tudo</button>
+            </div>
+            <br>
+            <div class="btn-submit">
+                <input type="submit" class="btn" value="Enviar" onclick="window.location.href = '/'" />
+            </div>
+        </div>
+        <script src="/js/competences.js"></script>
+    </body>
+</html>
