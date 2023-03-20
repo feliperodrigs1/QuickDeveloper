@@ -2,14 +2,18 @@
     ViewData["Title"] = "Home | QuickDeveloper";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Esta é a primeira página do QuickDevelopers</p>
+<link rel="stylesheet" href="/css/index.css" asp-append-version="true" />
 
+<section class="home main-bg" id="home">
 
-    <div id="like_button_container"></div>
-</div>
+    <div class="content">
+        <h3><span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus suscipit porro nam libero natus error consequatur sed repudiandae eos quo?</p>
+        <input type="submit" class="btn" value="Começar a Usar" />
+    </div>
 
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="/js/like_button.js"></script>
+    <div class="image">
+        <img src="~/img/index/team_work_blue.svg" alt="">
+    </div>
+
+</section>
