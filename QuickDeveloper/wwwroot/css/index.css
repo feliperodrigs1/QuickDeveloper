@@ -79,9 +79,10 @@ img {
 }
 
 .home .content p{
-    font-size: 20px;
+    font-size: 22px;
     color: black;
-    padding:1rem 0;
+    padding: 1rem 0;
+    font-weight: bold;
 }
 
 /* media queries  */
