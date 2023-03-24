@@ -3,7 +3,7 @@
     const img = document.querySelector('img');
     const text = document.querySelector('p');
     const defaultContent = document.querySelector('p').innerHTML;
-    let miliseconds = 30000;
+    let miliseconds = 20000;
     let flag = 2;
 
     setInterval(changeBackGround, miliseconds);
