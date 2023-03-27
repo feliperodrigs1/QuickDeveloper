@@ -1,0 +1,44 @@
+﻿@model Model_User
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="/css/competences.css" asp-append-version="true" />
+<title>Competências | QuickDeveloper</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+<html lang="pt-br">
+<body>
+    <div class="container">
+        <div class="observation">
+            <div class="title">
+                <i class="fas fa-code"></i>
+                <h2>@Model.UserName Nos conte mais sobre você: </h2>
+            </div>
+            <textarea class="form-control" rows="3" placeholder="Com observações detalhadas você tem maiores chances de ser contratado."></textarea>
+        </div>
+        <div class="wrapper">
+            <div class="title">
+                <i class="fas fa-check"></i>
+                <h2>Cadastre suas competências!</h2>
+            </div>
+            <div class="content">
+                <label>Pressione Enter para inserir</label>
+                <ul><input id="competence" type="text" spellcheck="false"></ul>
+            </div>
+            <div class="details">
+                <p><span>10</span> competências restantes</p>
+                <button>Remover tudo</button>
+            </div>
+            <br>
+            <div class="btn-submit">
+                <input type="submit" class="btn" value="Enviar informações" onclick="window.location.href = '/'" />
+            </div>
+        </div>
+    </div>
+    <script src="/js/competences.js"></script>
+</body>
+</html>
