@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<link rel="stylesheet" href="/css/register.css" asp-aend-vppersion="true" />
+<link rel="stylesheet" href="/css/register.css" asp-append-version="true" />
 <title>Login | Register</title>
 
 <html lang="pt-br">
@@ -16,11 +16,11 @@
             <div class="signin-signup">
 
                 <!-- Formulário Login-->
-                <form asp-controller="Register"  asp-action="Login" class="sign-in-form" method="post">
+                <form asp-controller="Register" asp-action="Login" class="sign-in-form" method="post">
                     <h2 class="title">Entrar no <span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" asp-for="UserName" placeholder="Login" required/>
+                        <input type="text" asp-for="Name" placeholder="Login" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
@@ -29,14 +29,13 @@
                     <input type="submit" value="Entrar" class="btn solid"/>                    
                 </form>
 
-                <!-- Formulário Cadastro-->
-
+                <!-- Formulário Cadastro feito por AJAX-->
                 
-                 <form asp-controller="Register" asp-action="Cadastrar" id="signup-form" class="sign-up-form" method="post"> 
+                 <form asp-controller="Register" asp-action="SignUp" id="signup-form" class="sign-up-form" method="post"> 
                     <h2 class="title">Cadastre-se</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" asp-for="UserName" placeholder="Login" required/>
+                        <input type="text" asp-for="Name" placeholder="Login" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>

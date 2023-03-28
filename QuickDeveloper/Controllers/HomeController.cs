@@ -24,23 +24,6 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        public IActionResult Competences()
-        {
-            return View();
-        }
-
-        [System.Web.Mvc.HttpPost]
-        public IActionResult CompetencesPath()
-        {
-            var path = Url.Action("Competences", "Home");
-            return Json(new { Path = path });
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

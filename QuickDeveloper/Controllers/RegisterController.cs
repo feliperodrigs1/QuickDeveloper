@@ -3,37 +3,29 @@ using QuickDeveloper.Models;
 using System.Diagnostics;
 
 namespace QuickDeveloper.Controllers {
-    public class RegisterController : Controller {
-
-        Model_User usuario = new Model_User();
-        Model_DB dbase = new Model_DB();
+    public class RegisterController : Microsoft.AspNetCore.Mvc.Controller
+    {
 
         public IActionResult Register() {
             return View();
         }
 
-
         public IActionResult Competences(Model_User user) {
-            return View(usuario);
+            return View(user);
         }
 
-
-        [System.Web.Mvc.HttpPost]
-        public IActionResult CompetencesPath() {
-            var path = Url.Action("Competences", "Home");
-            return Json(new { Path = path });
+        public IActionResult Login(Model_User user) {          
+            return View(user);
         }
 
-        public IActionResult Login(Model_User user) {
-            usuario = user;
-            return View(usuario);
-        }
+        [HttpPost]
+        public IActionResult SignUp(Model_User user, IFormCollection form) {
+            bool dev = !string.IsNullOrEmpty(form["dev"]);
+            
+            if (dev) return RedirectToAction("Competences", "Register", user);
 
-        public IActionResult Cadastrar(Model_User user) {
-            usuario = user;
-            return RedirectToAction("Competences", "Register", usuario);
+            return RedirectToAction("Login", "Register", user);
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
