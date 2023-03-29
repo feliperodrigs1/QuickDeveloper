@@ -8,6 +8,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 
 <html lang="pt-br">
@@ -18,7 +19,7 @@
                 <i class="fas fa-code"></i>
                 <h2>@Model.Name, nos conte mais sobre você: </h2>
             </div>
-            <textarea class="form-control" rows="3" placeholder="Com observações detalhadas você tem maiores chances de ser contratado."></textarea>
+            <textarea class="form-control" rows="3" placeholder="Com observações detalhadas você tem maiores chances de ser contratado." id="aditional-info"></textarea>
         </div>
         <div class="wrapper">
             <div class="title">
@@ -35,7 +36,7 @@
             </div>
             <br>
             <div class="btn-submit">
-                <input type="submit" class="btn" value="Enviar informações" onclick="window.location.href = '/'" />
+                <input type="submit" class="btn" value="Enviar informações" onclick="sendCompetences();" />
             </div>
         </div>
     </div>

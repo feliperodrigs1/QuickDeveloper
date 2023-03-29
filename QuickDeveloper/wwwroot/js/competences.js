@@ -52,3 +52,24 @@ removeBtn.addEventListener("click", () => {
     ul.querySelectorAll("li").forEach(li => li.remove());
     countTags();
 });
+
+function sendCompetences() {
+    let aditionalInfo = document.getElementById("aditional-info").value;
+    let competencesList = document.getElementsByTagName("li");
+    let compentecesArray = [];
+
+    for (let i = 0; i < competencesList.length; i++) {
+        compentecesArray.push(competencesList[i].textContent);
+    }
+
+    let competences = compentecesArray.join();
+
+    $.ajax({
+        url: "/Register/RegisterDev",
+        type: "POST",
+        data: { aditionalInfo, competences },
+        success: function (result) {
+            window.location.replace(result.path);
+        }
+    });
+}

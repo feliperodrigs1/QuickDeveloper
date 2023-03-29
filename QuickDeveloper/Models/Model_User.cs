@@ -4,7 +4,7 @@
         public string Password { get; set; }
         public string Email { get; set; }
         public DateTime Birthdate { get; set; }
-        public string Role { get; set; }
+        public int RoleID { get; set; }
         public string Competences { get; set; }
         public string AditionalInfo { get; set; }
 

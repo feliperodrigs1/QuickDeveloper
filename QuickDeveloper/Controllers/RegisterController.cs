@@ -14,13 +14,16 @@ namespace QuickDeveloper.Controllers {
         }
 
         public IActionResult Competences() {
-            Model_User user = JsonConvert.DeserializeObject<Model_User>((string)TempData["User"]);
+            Model_User user = deserializeUser(TempData["User"]);
+            TempData["User"] = JsonConvert.SerializeObject(user);
 
             return View(user);
         }
 
         [HttpPost]
         public IActionResult Login(Model_User user) {
+            //TODO chamada da API
+
             TempData["User"] = JsonConvert.SerializeObject(user);
 
             return RedirectToAction("Home", "User", routePost);
@@ -34,7 +37,28 @@ namespace QuickDeveloper.Controllers {
 
             if (dev) return RedirectToAction("Competences", "Register", routePost);
 
+            //TODO chamada da API para Solicitante
             return RedirectToAction("Home", "User", routePost);
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public IActionResult RegisterDev(string competences, string aditionalInfo)
+        {
+            Model_User user = deserializeUser(TempData["User"]);
+            user.Competences = competences;
+            user.AditionalInfo = aditionalInfo;
+
+            TempData["User"] = JsonConvert.SerializeObject(user);
+
+            //TODO chamada da API para Dev
+
+            var path = Url.Action("Home", "User");
+            return Json(new { Path = path });
+        }
+
+        internal Model_User deserializeUser(dynamic tempData)
+        {
+            return JsonConvert.DeserializeObject<Model_User>((string)tempData);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
