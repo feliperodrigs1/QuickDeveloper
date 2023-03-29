@@ -1,0 +1,22 @@
+﻿@model Model_User
+
+@{
+    ViewData["Title"] = "Login";
+    string identif;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@{
+    if (!string.IsNullOrEmpty(Model.Name)) 
+    {
+        identif = Model.Name;
+    }
+    else
+    {
+        identif = Model.Email;
+    }
+
+}
+
+<p>Olá, @identif! Seja muito bem vindo!</p>

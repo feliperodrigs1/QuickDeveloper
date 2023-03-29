@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickDeveloper.Models;
 using System.Diagnostics;
-using System.Web.Mvc;
 
 namespace QuickDeveloper.Controllers
 {
