@@ -1,9 +1,10 @@
-﻿@{
+﻿@model Model_User
+@{
     Layout = null;
 }
 
 <link rel="stylesheet" href="/css/register.css" asp-append-version="true" />
-<title>Login | Register</title>
+<title>SignIn | SignUp</title>
 
 <html lang="pt-br">
 <body>
@@ -13,39 +14,48 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="#" class="sign-in-form">
+
+                <!-- Formulário Login -->
+                <form asp-controller="Register" asp-action="Login" class="sign-in-form" method="post">
                     <h2 class="title">Entrar no <span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h2>
                     <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Login" required/>
+                        <i class="fas fa-envelope"></i>
+                        <input type="text" asp-for="Email" placeholder="Digite o email cadastrado" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Senha" required/>
+                        <input type="password" asp-for="Password" placeholder="Senha" required/>
                     </div>
-                    <input type="submit" value="Entrar" class="btn solid" />                    
+                    <input type="submit" value="Entrar" class="btn solid"/>                    
                 </form>
-                <form action="#" id="signup-form" class="sign-up-form">
+
+                <!-- Formulário Cadastro -->
+                
+                 <form asp-controller="Register" asp-action="SignUp" id="signup-form" class="sign-up-form" method="post"> 
                     <h2 class="title">Cadastre-se</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Login" />
+                        <input type="text" asp-for="Name" placeholder="Nome" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" />
+                        <input type="email" asp-for="Email" placeholder="Email" required/>
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" asp-for="Birthdate" placeholder="Data de Nascimento" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Senha" />
+                        <input type="password" asp-for="Password" placeholder="Senha" required/>
                     </div>
                     <br>
                     <div>
-                        <input type="checkbox" class="form-check-input" id="dev" name="dev" value="dev" onchange="verifyRole()">
+                       <input type="checkbox" class="form-check-input" id="dev" name="dev" value="dev"/>
                         <label for="">Fazer cadastro como Desenvolvedor</label>
                     </div>
                     <br>
-                    <input type="submit" class="btn" value="Enviar" />                    
+                    <input type="submit" value="Enviar" class="btn" />                    
                 </form>
             </div>
         </div>

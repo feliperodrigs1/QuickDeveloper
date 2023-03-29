@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickDeveloper.Models;
 using System.Diagnostics;
-using System.Web.Mvc;
 
 namespace QuickDeveloper.Controllers
 {
@@ -22,23 +21,6 @@ namespace QuickDeveloper.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        public IActionResult Competences()
-        {
-            return View();
-        }
-
-        [System.Web.Mvc.HttpPost]
-        public IActionResult CompetencesPath()
-        {
-            var path = Url.Action("Competences", "Home");
-            return Json(new { Path = path });
         }
 
 
