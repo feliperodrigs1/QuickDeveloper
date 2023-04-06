@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickDeveloper.Models;
+using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+
 
 namespace QuickDeveloper.Controllers
 {
@@ -18,6 +20,7 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
+        //[Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();
