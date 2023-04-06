@@ -2,12 +2,15 @@
 using Newtonsoft.Json;
 using QuickDeveloper.Models;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace QuickDeveloper.Controllers {
     public class RegisterController : Microsoft.AspNetCore.Mvc.Controller
     {
         //Definindo uma variavel padrão para utilizar requisições POST de um Controller para outro
         RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
+
+        HttpClient client = new HttpClient();
 
         public IActionResult SignIn() {
             return View();
@@ -21,10 +24,15 @@ namespace QuickDeveloper.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Login(Model_User user) {
+        public async Task<IActionResult> Login(Model_User user) {
             //TODO chamada da API
+            TempData["User"] = JsonConvert.SerializeObject(user);            
 
-            TempData["User"] = JsonConvert.SerializeObject(user);
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");           
+            var content = new StringContent($"{{\r\n \"Email\":\"{user.Email}\",\r\n    \"Password\" : \"{user.Password}\"\r\n}}", null, "application/json");
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
 
             return RedirectToAction("Home", "User", routePost);
         }
