@@ -64,27 +64,48 @@ namespace QuickDeveloper.Controllers {
         }
 
         [HttpPost]
-        public IActionResult SignUp(Model_User user, IFormCollection form) {
+        public async Task<IActionResult> SignUp(Model_User user, IFormCollection form) {
             bool dev = !string.IsNullOrEmpty(form["dev"]);
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
             if (dev) return RedirectToAction("Competences", "Register", routePost);
 
-            //TODO chamada da API para Solicitante
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
+            var content = new StringContent($"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
+                $"\"Email\":\"{user.Email}\",\r\n    " +
+                $"\"Password\" : \"{user.Password}\",\r\n    " +
+                $"\"RePassword\" : \"{user.Password}\",\r\n    " +
+                $"\"DataNascimento\" : \"{user.Birthdate}\",\r\n    " +
+                $"\"RoleID\" : \"2\"\r\n}}", null, "application/json");
+
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
             return RedirectToAction("Home", "User", routePost);
         }
 
         [System.Web.Mvc.HttpPost]
-        public IActionResult RegisterDev(string competences, string aditionalInfo)
+        public async Task<IActionResult> RegisterDev(string competences, string aditionalInfo)
         {
-            Model_User user = deserializeUser(TempData["User"]);
-            user.Competences = competences;
-            user.AditionalInfo = aditionalInfo;
+            Model_User user = deserializeUser(TempData["User"]);            
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
-            //TODO chamada da API para Dev
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
+            var content = new StringContent($"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
+                $"\"Email\":\"{user.Email}\",\r\n    " +
+                $"\"Password\" : \"{user.Password}\",\r\n    " +
+                $"\"RePassword\" : \"{user.Password}\",\r\n    " +
+                $"\"DataNascimento\" : \"{user.Birthdate}\",\r\n    " +
+                $"\"RoleID\" : \"3\",\r\n   " +
+                $"\"Competencias\" : \"{competences}\", \r\n    " + 
+                $"\"InfoAdicionais\" : \"{aditionalInfo}\"\r\n}}", null, "application/json");
+
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
 
             var path = Url.Action("Home", "User");
             return Json(new { Path = path });
