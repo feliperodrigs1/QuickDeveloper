@@ -32,9 +32,35 @@ namespace QuickDeveloper.Controllers {
             var content = new StringContent($"{{\r\n \"Email\":\"{user.Email}\",\r\n    \"Password\" : \"{user.Password}\"\r\n}}", null, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
 
-            return RedirectToAction("Home", "User", routePost);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+              
+                JArray jArray = JArray.Parse(responseContent);
+
+                string token = jArray[0]["message"].ToString();
+                
+                var cookieOptions = new CookieOptions
+                {
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    Secure = true,
+                };
+
+                Response.Cookies.Append("token", token, cookieOptions);
+
+
+                response.EnsureSuccessStatusCode();
+                return RedirectToAction("Home", "User", routePost);
+            }
+            else
+            {               
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return RedirectToAction("SignIn", "Register", routePost);
+            }
+            
         }
 
         [HttpPost]
