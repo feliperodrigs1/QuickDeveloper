@@ -1,10 +1,21 @@
-﻿.home{
+﻿
+
+.home{
     font-family: 'Roboto', sans-serif;
     margin:0; padding:0;
     box-sizing: border-box;
     text-decoration: none;
     outline: none; border:none;
 }
+
+.user-message {
+    text-align: right;
+}
+
+.bot-message {
+    text-align: left;
+}
+
 
 .container {
     padding: 0;
