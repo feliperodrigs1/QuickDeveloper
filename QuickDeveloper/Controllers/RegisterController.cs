@@ -69,15 +69,20 @@ namespace QuickDeveloper.Controllers {
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
+            string formattedUserDateTime = user.Birthdate.ToString("yyyy-MM-ddTHH:mm:ss");
+
             if (dev) return RedirectToAction("Competences", "Register", routePost);
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
-            var content = new StringContent($"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
+            var content = new StringContent(
+                $"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
                 $"\"Email\":\"{user.Email}\",\r\n    " +
                 $"\"Password\" : \"{user.Password}\",\r\n    " +
                 $"\"RePassword\" : \"{user.Password}\",\r\n    " +
-                $"\"DataNascimento\" : \"{user.Birthdate}\",\r\n    " +
-                $"\"RoleID\" : \"2\"\r\n}}", null, "application/json");
+                $"\"DataNascimento\" : \"{formattedUserDateTime}\",\r\n    " +
+                $"\"Role\" : \"2\"\r\n}}", null, "application/json");
+
+            //var content = new StringContent("{\r\n    \"Username\" : \"teste_email\",\r\n    \"Email\":\"gabrielsrizzi@gmail.com\",\r\n    \"Password\" : \"Senha123!\",\r\n    \"RePassword\" : \"Senha123!\",\r\n    \"DataNascimento\" : \"2006-01-01T00:00:00\",\r\n    \"Role\" : \"1\"\r\n}", null, "application/json");
 
             request.Content = content;
             var response = await client.SendAsync(request);
@@ -93,13 +98,15 @@ namespace QuickDeveloper.Controllers {
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
+            string formattedUserDateTime = user.Birthdate.ToString("yyyy-MM-ddTHH:mm:ss");
+
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
             var content = new StringContent($"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
                 $"\"Email\":\"{user.Email}\",\r\n    " +
                 $"\"Password\" : \"{user.Password}\",\r\n    " +
                 $"\"RePassword\" : \"{user.Password}\",\r\n    " +
-                $"\"DataNascimento\" : \"{user.Birthdate}\",\r\n    " +
-                $"\"RoleID\" : \"3\",\r\n   " +
+                $"\"DataNascimento\" : \"{formattedUserDateTime}\",\r\n    " +
+                $"\"Role\" : \"3\",\r\n   " +
                 $"\"Competencias\" : \"{competences}\", \r\n    " + 
                 $"\"InfoAdicionais\" : \"{aditionalInfo}\"\r\n}}", null, "application/json");
 
