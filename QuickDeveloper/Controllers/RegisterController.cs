@@ -58,6 +58,7 @@ namespace QuickDeveloper.Controllers {
             else
             {               
                 var errorContent = await response.Content.ReadAsStringAsync();
+                ViewBag.Error = "Email ou/e Senha inválido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
             }
             
@@ -81,8 +82,6 @@ namespace QuickDeveloper.Controllers {
                 $"\"RePassword\" : \"{user.Password}\",\r\n    " +
                 $"\"DataNascimento\" : \"{formattedUserDateTime}\",\r\n    " +
                 $"\"Role\" : \"2\"\r\n}}", null, "application/json");
-
-            //var content = new StringContent("{\r\n    \"Username\" : \"teste_email\",\r\n    \"Email\":\"gabrielsrizzi@gmail.com\",\r\n    \"Password\" : \"Senha123!\",\r\n    \"RePassword\" : \"Senha123!\",\r\n    \"DataNascimento\" : \"2006-01-01T00:00:00\",\r\n    \"Role\" : \"1\"\r\n}", null, "application/json");
 
             request.Content = content;
             var response = await client.SendAsync(request);

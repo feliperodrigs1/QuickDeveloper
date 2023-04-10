@@ -9,6 +9,8 @@ namespace QuickDeveloper.Controllers
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ILogger<HomeController> _logger;
+        HttpClient client = new HttpClient();
+        RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,10 +22,27 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
+        public IActionResult Redirect()
+        {
+            return View();
+        }
+
         //[Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {    
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/logout");
+            var content = new StringContent("", null, "application/json");
+            request.Content = content;
+            var response = await client.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            return RedirectToAction("Home", "User", routePost);
         }
 
 

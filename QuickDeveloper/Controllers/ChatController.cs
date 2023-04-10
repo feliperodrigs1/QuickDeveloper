@@ -4,7 +4,6 @@ using QuickDeveloper.Models;
 
 namespace QuickDeveloper.Controllers {
     
-    
     public class ChatController : Controller {
         RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
         public IActionResult ChatBot() {
@@ -13,7 +12,7 @@ namespace QuickDeveloper.Controllers {
             if (!AuthenticateController.VerifyUser(Request,"Regular"))
             {
                 return RedirectToAction("SignIn", "Register", routePost);
-            };
+            }
 
             return View();
         }

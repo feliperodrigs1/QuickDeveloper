@@ -35,7 +35,7 @@
                     <h2 class="title">Cadastre-se</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" asp-for="Username" placeholder="Nome" required/>
+                        <input type="text" asp-for="Username" placeholder="Username" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
@@ -87,6 +87,15 @@
             </div>
         </div>
     </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            window.onload = function() {
+                alert(ViewBag.Error);
+            }
+        </script>
+    }
 
     <script src="/js/register.js"></script>
 </body>
