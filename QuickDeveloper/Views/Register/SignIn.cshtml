@@ -88,14 +88,13 @@
         </div>
     </div>
 
-    @if (ViewBag.Error != null)
+    @if (TempData["Error"] != null)
     {
         <script>
-            window.onload = function() {
-                alert(ViewBag.Error);
-            }
-        </script>
+            alert("@TempData["Error"]");
+        </script>        
     }
+    
 
     <script src="/js/register.js"></script>
 </body>
