@@ -59,10 +59,10 @@ function sendCompetences() {
     let compentecesArray = [];
 
     for (let i = 0; i < competencesList.length; i++) {
-        compentecesArray.push(competencesList[i].textContent);
+        compentecesArray.push(competencesList[i].textContent.trim());
     }
 
-    let competences = compentecesArray.join();
+    let competences = compentecesArray.join();    
 
     $.ajax({
         url: "/Register/RegisterDev",

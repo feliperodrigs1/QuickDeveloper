@@ -33,7 +33,7 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {            
             HttpContext.Response.Cookies.Delete("token");
 

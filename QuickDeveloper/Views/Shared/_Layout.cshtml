@@ -4,17 +4,14 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @model Model_User
 @{
-
-
     var token = context.HttpContext.Request.Cookies["token"];
     SecurityToken validatedToken = null;
-    if (!String.IsNullOrEmpty(token))
-    {
 
+    if (!string.IsNullOrEmpty(token))
+    {
         TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
         var tokenHandler = new JwtSecurityTokenHandler();
         AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-
     }
 }
 
@@ -49,7 +46,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                         </li>
-                        @if(validatedToken != null)
+                        @if (validatedToken != null)
                         {
                             if (validatedToken.ValidTo > DateTime.UtcNow)
                             {
