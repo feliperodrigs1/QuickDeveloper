@@ -92,6 +92,7 @@
     {
         <script>
             alert("@TempData["Error"]");
+            @{ TempData["Error"] = null; }
         </script>        
     }
     

@@ -1,7 +1,8 @@
 ﻿@using QuickDeveloper.Controllers;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @model Model_User
 @{
-    HttpContext httpContext;
+    var cookie = context.HttpContext.Request.Cookies["token"];
 }
 
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (cookie != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>

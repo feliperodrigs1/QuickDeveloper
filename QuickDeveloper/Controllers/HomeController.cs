@@ -42,7 +42,7 @@ namespace QuickDeveloper.Controllers
 
             response.EnsureSuccessStatusCode();
 
-            return RedirectToAction("Home", "User", routePost);
+            return RedirectToAction("Index", "Home", routePost);
         }
 
 
