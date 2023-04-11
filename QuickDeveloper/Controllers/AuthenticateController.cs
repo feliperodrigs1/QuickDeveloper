@@ -18,7 +18,7 @@ namespace QuickDeveloper.Controllers
 
         private HttpRequest httpRequest { get; set; }
 
-        private ClaimsPrincipal claimsPrincipal { get; set; }
+        public ClaimsPrincipal claimsPrincipal { get; set; }
 
         public string RecoveryToken()
         {
