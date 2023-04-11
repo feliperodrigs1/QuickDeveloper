@@ -46,27 +46,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                         </li>
-                        @if (validatedToken != null)
+                        @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
                         {
-                            if (validatedToken.ValidTo > DateTime.UtcNow)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                            </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                 <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
                             </li>
-                        }
+                        }                        
                     </ul>
                 </div>
             </div>
