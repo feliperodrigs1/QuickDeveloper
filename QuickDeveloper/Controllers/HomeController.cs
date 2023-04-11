@@ -2,7 +2,7 @@
 using QuickDeveloper.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
-
+using Microsoft.AspNetCore.Authentication;
 
 namespace QuickDeveloper.Controllers
 {
@@ -34,13 +34,8 @@ namespace QuickDeveloper.Controllers
         }
 
         public async Task<IActionResult> Logout()
-        {    
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/logout");
-            var content = new StringContent("", null, "application/json");
-            request.Content = content;
-            var response = await client.SendAsync(request);
-
-            response.EnsureSuccessStatusCode();
+        {            
+            HttpContext.Response.Cookies.Delete("token");
 
             return RedirectToAction("Index", "Home", routePost);
         }

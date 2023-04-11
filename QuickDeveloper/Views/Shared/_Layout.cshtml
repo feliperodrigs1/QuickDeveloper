@@ -4,10 +4,18 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @model Model_User
 @{
+
+
     var token = context.HttpContext.Request.Cookies["token"];
-    TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
-    var tokenHandler = new JwtSecurityTokenHandler();
-    AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+    SecurityToken validatedToken = null;
+    if (!String.IsNullOrEmpty(token))
+    {
+
+        TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+
+    }
 }
 
 <!DOCTYPE html>
@@ -41,17 +49,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                         </li>
-                        @if (validatedToken.ValidTo > DateTime.UtcNow)
+                        @if(validatedToken != null)
+                        {
+                            if (validatedToken.ValidTo > DateTime.UtcNow)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
+                                </li>
+                            }
+
+                        }
+                        else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
-                            </li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
+                                </li>
                         }
-                        else {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
-                            </li>
-                        }                        
                     </ul>
                 </div>
             </div>
