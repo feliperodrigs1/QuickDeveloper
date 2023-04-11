@@ -78,7 +78,5 @@ namespace QuickDeveloper.Controllers
 
             return result;
         }
-
-
     }
 }

@@ -24,8 +24,7 @@ namespace QuickDeveloper.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Model_User user) {
-            //TODO chamada da API
+        public async Task<IActionResult> Login(Model_User user) {            
             TempData["User"] = JsonConvert.SerializeObject(user);            
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");           
@@ -60,8 +59,7 @@ namespace QuickDeveloper.Controllers {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
-            }
-            
+            }            
         }
 
         [HttpPost]
