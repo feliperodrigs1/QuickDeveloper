@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.IdentityModel.Tokens;
+@using QuickDeveloper.Controllers;
+@using System.IdentityModel.Tokens.Jwt;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@model Model_User
+@{
+    var token = context.HttpContext.Request.Cookies["token"];
+    SecurityToken validatedToken = null;
+
+    if (!string.IsNullOrEmpty(token))
+    {
+        TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -29,9 +46,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
-                        </li>
+                        @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
+                            </li>
+                        }                        
                     </ul>
                 </div>
             </div>

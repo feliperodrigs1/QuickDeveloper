@@ -1,0 +1,17 @@
+﻿<p>Conta verificada com sucesso!</p> 
+<p id="timer"></p>
+
+<script>
+    let seconds = 5;
+    
+    function updateTime() {        
+        document.getElementById('timer').innerHTML = 'Você será redirecionado em ' + seconds  + ' segundos';
+        seconds--;
+
+        if (seconds == 0) {
+            window.location.href = '/Home/Index';
+        }
+    }
+
+    setInterval(updateTime, 1500);
+</script>

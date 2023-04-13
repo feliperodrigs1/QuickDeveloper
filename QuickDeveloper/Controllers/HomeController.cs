@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickDeveloper.Models;
+using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
 
 namespace QuickDeveloper.Controllers
 {
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ILogger<HomeController> _logger;
+        HttpClient client = new HttpClient();
+        RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -18,9 +22,22 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
+        public IActionResult Redirect()
+        {
+            return View();
+        }
+
+        //[Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {            
+            HttpContext.Response.Cookies.Delete("token");
+
+            return RedirectToAction("Index", "Home", routePost);
         }
 
 
