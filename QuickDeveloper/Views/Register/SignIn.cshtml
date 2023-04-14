@@ -35,11 +35,16 @@
                     <h2 class="title">Cadastre-se</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" asp-for="Username" placeholder="Username" required/>
+                        <input type="text" asp-for="Username" placeholder="Username" pattern="[^\s]+" required/>
                     </div>
+                    <ul>
+                        <li>
+                            Não pode haver espaços em branco
+                        </li>
+                    </ul>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" asp-for="Email" placeholder="Email" required/>
+                        <input type="email" asp-for="Email" placeholder="Email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-calendar"></i>
@@ -47,8 +52,22 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" asp-for="Password" placeholder="Senha" required/>
+                        <input type="password" asp-for="Password" placeholder="Senha" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@@#$%^&+=])" />
                     </div>
+                    <ul>
+                        <li>
+                            Letra maiúscula
+                        </li>
+                        <li>
+                            Letra minúscula
+                        </li>
+                        <li>
+                            Número
+                        </li>
+                        <li>
+                            Símbolos (@@#$%^&+=)
+                        </li>
+                    </ul>
                     <br>
                     <div>
                        <input type="checkbox" class="form-check-input" id="dev" name="dev" value="dev"/>
@@ -95,7 +114,6 @@
             @{ TempData["Error"] = null; }
         </script>        
     }
-    
 
     <script src="/js/register.js"></script>
 </body>

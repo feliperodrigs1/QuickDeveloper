@@ -28,36 +28,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 border">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuickDeveloper</a>
+                <ul class="nav navbar-nav ">
+                    <li class="rounded">
+                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">QuickDeveloper</a>
+                    </li>
+                </ul>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
-                        </li>
+                    <ul class="nav navbar-nav navbar-right rounded">
                         @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                            <li class="nav-item rounded">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                             </li>
                         }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
-                            </li>
-                        }                        
+                        <li>
+                            <a href="#" class="dropdown-toggle text-dark" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+                            <ul class="dropdown-menu">
+                                @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
+                                {
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="SignIn">Entrar</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -77,6 +87,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
