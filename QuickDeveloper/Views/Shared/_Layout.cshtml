@@ -1,10 +1,12 @@
 ﻿@using Microsoft.IdentityModel.Tokens;
 @using QuickDeveloper.Controllers;
 @using System.IdentityModel.Tokens.Jwt;
+@using System.Security.Claims;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @model Model_User
 @{
     var token = context.HttpContext.Request.Cookies["token"];
+    string roleUser = "";
     SecurityToken validatedToken = null;
 
     if (!string.IsNullOrEmpty(token))
@@ -12,6 +14,7 @@
         TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
         var tokenHandler = new JwtSecurityTokenHandler();
         AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+        roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
     }
 }
 
@@ -53,9 +56,12 @@
                                     <li>
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
                                     </li>
-                                    <li>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
-                                    </li>
+                                    if (roleUser.Equals("REGULAR"))
+                                    {
+                                        <li>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
+                                        </li>
+                                    }                                    
                                 }
                                 else
                                 {
