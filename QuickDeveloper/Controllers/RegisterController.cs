@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using QuickDeveloper.Models;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace QuickDeveloper.Controllers {
     public class RegisterController : Microsoft.AspNetCore.Mvc.Controller
@@ -58,7 +59,7 @@ namespace QuickDeveloper.Controllers {
             {               
                 var errorContent = await response.Content.ReadAsStringAsync();
                 TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
-                return RedirectToAction("SignIn", "Register", routePost);
+                return RedirectToAction("SignIn","Register", routePost);
             }            
         }
 
@@ -83,12 +84,22 @@ namespace QuickDeveloper.Controllers {
 
             request.Content = content;
             var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("SignIn", "Register", routePost);
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
 
-            return RedirectToAction("Home", "User", routePost);
+                JArray jArray = JArray.Parse(responseContent);
+
+                TempData["Error"] = Regex.Replace(jArray[0]["message"].ToString(), "[^a-zA-Z0-9\\s]+", "");
+                return RedirectToAction("SignIn", "Register", routePost);
+            }
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public async Task<IActionResult> RegisterDev(string competences, string aditionalInfo)
         {
             Model_User user = deserializeUser(TempData["User"]);            

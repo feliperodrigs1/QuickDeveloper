@@ -3,6 +3,7 @@ using QuickDeveloper.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
+using System.Web;
 
 namespace QuickDeveloper.Controllers
 {
@@ -22,9 +23,20 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
-        public IActionResult Redirect()
+        [Route("Home/Redirect")]
+        public async Task<IActionResult> Redirect(string id,string code)
         {
-            return View();
+            string decodedInput = HttpUtility.UrlEncode(code);
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://164.152.196.151/ativa?UsuarioId={id}&CodigoDeAtivacao={decodedInput}");
+            var response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                return View();
+            }
+            else
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
 
         //[Authorize(Roles = "admin")]
