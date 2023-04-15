@@ -31,7 +31,7 @@ namespace QuickDeveloper.Controllers
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("Index", "Home", routePost);
             }
             else
             {
