@@ -10,7 +10,7 @@ namespace Services.Services
 {
     public class UtilitiesServices
     {
-        public async void GerarLog(Guid key, object request, object response, string method, bool useCompression)
+        public void GerarLog(Guid key, object request, object response, string method, bool useCompression)
         {
             var data = new Dictionary<string, object>();
             data.Add("Request", request);
