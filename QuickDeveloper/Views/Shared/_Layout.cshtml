@@ -53,15 +53,15 @@
                             <ul class="dropdown-menu">
                                 @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
                                 {
-                                    <li>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
-                                    </li>
                                     if (roleUser.Equals("REGULAR"))
                                     {
                                         <li>
                                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                                         </li>
-                                    }                                    
+                                    }
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                                    </li>                                  
                                 }
                                 else
                                 {
