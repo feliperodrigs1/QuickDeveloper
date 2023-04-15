@@ -34,8 +34,8 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 border">
             <div class="container-fluid">
-                <ul class="nav navbar-nav ">
-                    <li class="rounded">
+                <ul class="nav navbar-nav">
+                    <li>
                         <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">QuickDeveloper</a>
                     </li>
                 </ul>
@@ -45,12 +45,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="nav navbar-nav navbar-right rounded">
-                        @if (validatedToken != null || validatedToken?.ValidTo > DateTime.UtcNow)
-                        {
-                            <li class="nav-item rounded">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
-                            </li>
-                        }
                         <li>
                             <a href="#" class="dropdown-toggle text-dark" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
                             <ul class="dropdown-menu">
@@ -58,6 +52,9 @@
                                 {
                                     <li>
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatBot">QuickChat</a>
                                     </li>
                                 }
                                 else
