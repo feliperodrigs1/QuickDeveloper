@@ -20,7 +20,7 @@ namespace Services.Services
 
         public async Task<Models.ComplementationResponse> CreateComplementation(Models.ComplementationRequest request)
         {
-            string apiKey = _configuration?.GetSection("Api-Key")?.Value;
+            string apiKey = _configuration?.GetSection("Api-Key")?.Value ?? throw new Exception("Não foi possível recuperar a API Key da OpenAI na AppSettings. Por favor, verificar!");
             OpenAIClient openAIClient = new OpenAIClient(apiKey);
 
             if (Guid.TryParse(request.SessionId, out Guid sessionId) == false)
