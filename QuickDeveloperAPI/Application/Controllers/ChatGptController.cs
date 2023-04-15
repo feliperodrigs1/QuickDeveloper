@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Models;
+using Microsoft.AspNetCore.Mvc;
 using Services.Services;
 using Services.Services.Models;
 
@@ -14,11 +15,12 @@ namespace Application.Controllers
             _configuration = configuration;
         }
         [HttpPost("CreateComplementation")]
-        [ProducesResponseType(typeof(ComplementationResponse), 200)]
-        [ProducesResponseType(typeof(ComplementationResponse), 400)]
+        [ProducesResponseType(typeof(CustomReturn<ComplementationResponse>), 200)]
+        [ProducesResponseType(typeof(CustomReturn<ComplementationResponse>), 400)]
         public async Task<IActionResult> Create([FromBody] ComplementationRequest request)
         {
-            var response = await new ChatGptServices(_configuration).CreateComplementation(request);
+            var response = new CustomReturn<ComplementationResponse>();
+            response.Data = await new ChatGptServices(_configuration).CreateComplementation(request);
 
             return StatusCode(StatusCodes.Status200OK, response);
         }

@@ -10,10 +10,12 @@ namespace Services.Services
     public class ChatGptServices
     {
         private readonly IConfiguration _configuration;
+        private readonly UtilitiesServices _utilities;
 
         public ChatGptServices(IConfiguration configuration)
         {
             _configuration = configuration;
+            _utilities = new UtilitiesServices();
         }
 
         public async Task<Models.ComplementationResponse> CreateComplementation(Models.ComplementationRequest request)
@@ -72,7 +74,7 @@ namespace Services.Services
                 Message = question,
             };
         }
-        private static async Task<string> GenerateQuestion(OpenAIClient openAIClient, string prompt, Guid sessionId)
+        private async Task<string> GenerateQuestion(OpenAIClient openAIClient, string prompt, Guid sessionId)
         {
             var request = new CompletionRequest
             {
@@ -86,7 +88,7 @@ namespace Services.Services
 
             var response = await openAIClient.CompletionsEndpoint.CreateCompletionAsync(request);
 
-            await new UtilitiesServices().GerarLog(sessionId, request, response, "Completion", false);
+            _utilities.GerarLog(sessionId, request, response, "Completion", false);
 
             return response.Completions[0].Text.Trim();
         }
