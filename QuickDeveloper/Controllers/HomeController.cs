@@ -19,7 +19,7 @@ namespace QuickDeveloper.Controllers
         }
 
         public IActionResult Index()
-        {
+        {           
             return View();
         }
 
@@ -31,7 +31,8 @@ namespace QuickDeveloper.Controllers
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Home", routePost);
+                //return RedirectToAction("Index", "Home", routePost);
+                return View();
             }
             else
             {
