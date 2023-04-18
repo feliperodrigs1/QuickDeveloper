@@ -23,5 +23,29 @@ body {
 }
 
 .footer {
+    border-start-end-radius: 15px;
+    border-start-start-radius: 15px;
+    box-shadow: inherit 0,0,0,10px;
     background-color: #ffffff;
+}
+
+li.rounded :hover {
+    border-radius: 10px;
+}
+
+nav.border {
+    border-end-end-radius: 15px;
+    border-end-start-radius: 15px;
+    box-shadow: inherit 0,0,0,10px;
+}
+
+.nav > li > a.logo:hover {
+    text-decoration: none;
+    background-color: white;
+}
+
+a.logo {
+    font-size: 21px;
+    font-weight: 400;
+    font-family: 'QuickSand', sans-serif;
 }
