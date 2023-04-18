@@ -50,7 +50,7 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" asp-for="Password" placeholder="Senha" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@@#$%^&+=])" />
+                        <input type="password" asp-for="Password" placeholder="Senha" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@@#$%^&*]).{5,}" required />
                     </div>
                     <ul>
                         <li> Letra maiúscula </li>
