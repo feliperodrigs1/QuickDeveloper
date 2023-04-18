@@ -17,6 +17,11 @@ body {
   margin-bottom: 60px;
 }
 
+.navbar {
+    position: fixed;
+    width: 100%;
+}
+
 .footer {
     background-color: #ffffff;
 }

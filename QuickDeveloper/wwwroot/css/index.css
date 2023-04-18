@@ -40,8 +40,8 @@ body {
     transition: 1.0s ease-in-out;
 }
 
-section{
-    height: 80vh;
+section {
+    min-height: 100vh;
 }
 
 .btn {
@@ -84,6 +84,49 @@ img {
     padding: 1rem 0;
     font-weight: bold;
 }
+
+h4 {
+    padding-top: 25px;
+    font-family: 'QuickSand', sans-serif;
+}
+
+.features .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.features .box-container .box{
+    flex:1 1 30rem;
+    background:#fff;
+    border-radius: .5rem;
+    border:.1rem solid rgba(0,0,0,.2);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    margin:1.5rem;
+    padding:3rem 2rem;
+    border-radius: .5rem;
+    text-align: center;
+    transition: .2s linear;
+}
+
+.features .box-container .box img{
+    height: 15rem;
+}
+
+.features .box-container .box h3{
+    font-size: 2rem;
+    color:#333;
+    padding-top: 1rem;
+}
+
+.features .box-container .box p{
+    font-size: 1.3rem;
+    color:#666;
+    padding: 1rem 0;
+}
+
 
 /* media queries  */
 
