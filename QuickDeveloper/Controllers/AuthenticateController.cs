@@ -16,9 +16,9 @@ namespace QuickDeveloper.Controllers
 
         public static AuthenticateController Instance { get { return lazy.Value; } }
 
-        private HttpRequest httpRequest { get; set; }
+        private HttpRequest? httpRequest { get; set; }
 
-        public ClaimsPrincipal claimsPrincipal { get; set; }
+        public ClaimsPrincipal? claimsPrincipal { get; set; }
 
         public string RecoveryToken()
         {
@@ -43,12 +43,12 @@ namespace QuickDeveloper.Controllers
         {
             try
             {
-                AuthenticateController.Instance.httpRequest = request;              
-                string token = AuthenticateController.Instance.RecoveryToken();
-                TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters(token);
+                Instance.httpRequest = request;              
+                string token = Instance.RecoveryToken();
+                TokenValidationParameters validationParameters = Instance.ValidationParameters(token);
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
 
                 if (validatedToken.ValidTo < DateTime.UtcNow)
                 {
@@ -67,14 +67,14 @@ namespace QuickDeveloper.Controllers
 
         public static bool VerifyUser(HttpRequest request, string role)
         {
-            if (!AuthenticateController.VerifyUser(request))
+            if (!VerifyUser(request))
             {
                 return false;
             }
 
-            var roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+            var roleUser = Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
 
-            bool result = roleUser.ToUpper() == role.ToUpper() ? true : false;
+            bool result = roleUser.ToUpper() == role.ToUpper();
 
             return result;
         }

@@ -199,6 +199,11 @@ h2.title {
     font-size: 0.8rem;
 }
 
+ul li {
+    font-weight: 300;
+    font-family: 'Roboto', system-ui;
+}
+
 .right-panel .image,
 .right-panel .content {
     transform: translateX(800px);
