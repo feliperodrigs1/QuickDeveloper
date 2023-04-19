@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="OpenAI-DotNet" Version="6.3.1" />
-  </ItemGroup>
-
 </Project>

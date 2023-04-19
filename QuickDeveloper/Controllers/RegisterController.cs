@@ -127,16 +127,8 @@ namespace QuickDeveloper.Controllers
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            var path = Url.Action("Index", "Home");
-
-            if (response.IsSuccessStatusCode)
-            {
-                path = Url.Action("Index", "Home");
-            }
-            else
-            {
-
-            }
+            TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
+            var path = Url.Action("Index", "Home");           
             return Json(new { Path = path });
         }
 
