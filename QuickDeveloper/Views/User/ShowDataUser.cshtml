@@ -25,17 +25,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" value=@dataUser.Email/>
+                <input asp-for="Email" class="form-control" value=@dataUser.Email readonly/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birthdate" class="control-label"></label>
-                <input asp-for="Birthdate" class="form-control" type="date" value=@dataUser.Birthdate.ToString("yyyy-MM-dd") />
+                <input asp-for="Birthdate" class="form-control" type="date" value=@dataUser.Birthdate.ToString("yyyy-MM-dd") readonly/>
                 <span asp-validation-for="Birthdate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoleName" class="control-label"></label>
-                <input asp-for="RoleName" class="form-control" value=@dataUser.RoleName/>
+                <input asp-for="RoleName" class="form-control" value=@dataUser.RoleName readonly/>
                 <span asp-validation-for="RoleName" class="text-danger"></span>
             </div>
             <div class="form-group">

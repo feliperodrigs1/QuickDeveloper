@@ -70,6 +70,34 @@ namespace QuickDeveloper.Models
             }
         }
 
+        public static void UpdateData_User(Model_View_User datauser)
+        {
+            try
+            {
+
+                Model_DB.Instance.sqlConnection.Open();
+
+                var parameters = new DynamicParameters();
+                
+                parameters.Add("@USERNAME", datauser.Username);
+                parameters.Add("@EMAIL", datauser.Email);
+                parameters.Add("@COMPETENCES", datauser.Competences);
+                parameters.Add("@ADITIONALINFO", datauser.AditionalInfo);
+
+                var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_AlterUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
+
+                Model_DB.Instance.sqlConnection.Close();
+
+                Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
 
     }
 }

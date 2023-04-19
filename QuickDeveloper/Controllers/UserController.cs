@@ -29,8 +29,19 @@ namespace QuickDeveloper.Controllers
 
         public IActionResult EditDataUser(Model_View_User user)
         {
-            Model_View_User usuario = user;
-            return View();
+            try
+            {
+                Model_DB.UpdateData_User(user);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Erro ao alterar as informações!";
+
+            }
+
+            return View("ShowDataUser");
+
+
         }
     }
 }

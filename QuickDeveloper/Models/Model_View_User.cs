@@ -4,6 +4,7 @@ namespace QuickDeveloper.Models
 {
     public class Model_View_User
     {
+        public int Id { get; set; }
         public string Username { get; set; }       
         public string Email { get; set; }
 
