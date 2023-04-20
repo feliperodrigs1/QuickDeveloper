@@ -59,7 +59,7 @@ function sendChat() {
     input.value = ''; // limpa o texbox
     sendMessage(message, 'user'); // chama a função passando a mensagem da variável e o remetente como usuário
     setTimeout(() => { // aguarda 0,3 segundos
-        if (name == "") {
+        if (name != "") {
             name = message;
             //setTimeout(() => {//aguarda 2 segundos APÓS CHAMADA DA FUNÇÃO
             //    sendMessage(`Seja bem-vindo ${name}`, 'bot');

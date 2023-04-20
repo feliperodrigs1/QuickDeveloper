@@ -62,7 +62,7 @@ function sendCompetences() {
         compentecesArray.push(competencesList[i].textContent.trim());
     }
 
-    let competences = compentecesArray.join();    
+    let competences = compentecesArray.join(", ");    
 
     $.ajax({
         url: "/Register/RegisterDev",
@@ -72,4 +72,9 @@ function sendCompetences() {
             window.location.replace(result.path);
         }
     });
+
+}
+
+function setFocus() {
+    document.getElementById("aditional-info").focus();
 }

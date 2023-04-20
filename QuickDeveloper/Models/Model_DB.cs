@@ -25,8 +25,10 @@ namespace QuickDeveloper.Models
         {
             try
             {
-                Model_DB.Instance.sqlConnection.Open();
-
+                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    Model_DB.Instance.sqlConnection.Open();
+                }
                 SqlCommand sqlCommand = new SqlCommand("spSLN_InsertUpdateRequisition", Model_DB.Instance.sqlConnection);
                 var parameters = new DynamicParameters();
 
@@ -51,7 +53,10 @@ namespace QuickDeveloper.Models
             {
                 int id = Convert.ToInt32(IdUser);
 
-                Model_DB.Instance.sqlConnection.Open();
+                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    Model_DB.Instance.sqlConnection.Open();
+                }
 
                 var parameters = new DynamicParameters();            
 
@@ -74,9 +79,10 @@ namespace QuickDeveloper.Models
         {
             try
             {
-
-                Model_DB.Instance.sqlConnection.Open();
-
+                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    Model_DB.Instance.sqlConnection.Open();
+                }
                 var parameters = new DynamicParameters();
                 
                 parameters.Add("@USERNAME", datauser.Username);
