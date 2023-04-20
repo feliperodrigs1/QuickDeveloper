@@ -15,7 +15,8 @@ namespace QuickDeveloper.Controllers
 
             return View(user);
         }
-        public IActionResult ShowDataUser()
+
+        public IActionResult Edit()
         {
             var jwt = Request.Cookies["token"]?.ToString();
 
@@ -36,12 +37,9 @@ namespace QuickDeveloper.Controllers
             catch (Exception ex)
             {
                 TempData["Error"] = "Erro ao alterar as informações!";
-
             }
 
-            return View("ShowDataUser");
-
-
+            return View("Edit");
         }
     }
 }
