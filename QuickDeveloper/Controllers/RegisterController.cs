@@ -81,7 +81,8 @@ namespace QuickDeveloper.Controllers {
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            return RedirectToAction("Home", "User", routePost);
+            TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
+            return RedirectToAction("Index", "Home", routePost);
         }
 
         [System.Web.Mvc.HttpPost]
@@ -106,7 +107,8 @@ namespace QuickDeveloper.Controllers {
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            var path = Url.Action("Home", "User");
+            TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
+            var path = Url.Action("Index", "Home");
             return Json(new { Path = path });
         }
 
