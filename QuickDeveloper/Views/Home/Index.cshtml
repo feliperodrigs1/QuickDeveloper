@@ -10,7 +10,7 @@
     <div class="content">
         <h3><span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></h3>
         <p>Somos uma ferramenta simples e intuitiva voltada para o desenvolvimento de aplicações, contando com o direcionamento para o planejamento e alinhamento com os desenvolvedores.</p>
-        <a role="button" class="btn" asp-controller="Register" asp-action="SignIn">Começar a Usar</a>
+        <a role="button" class="btn" asp-controller="Chat" asp-action="ChatBot">Começar a Usar</a>
     </div>
 
     <div class="image">
@@ -18,5 +18,39 @@
     </div>
 
 </section>
+
+<section class="features" id="features">
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="~/img/index/web_search.svg" alt="">
+            <h4>Coloque sua ideia em prática!</h4>
+            <p>Se cadastre em nossa plataforma e consulte a sua ideia em nosso ChatBot. <br />Depois, caso queira, solicite o trabalho à um desenvolvedor capacitado.</p>            
+        </div>
+
+        <div class="box">
+            <img src="~/img/index/developer.svg" alt="">
+            <h4>Desenvolva novas ideias!</h4>
+            <p>Você é um dev com interesse em desenvolver novos projetos? <br />Se sim, cadastre-se em nossa plataforma como desenvolvedor e fique atento nas solicitações de trabalho. <br /> Em seu perfil, você pode analisá-las conforme as suas competências cadastradas.</p>            
+        </div>
+
+        <div class="box">
+            <img src="~/img/index/link.svg" alt="">
+            <h4>Interaja com o colaborador!</h4>
+            <p>Nosso site faz a relação automática entre o solicitante e o desenvolvedor, ou seja, em pouco tempo o desenvolvimento irá se iniciar com base nos requisitos de sua ideia e as competências dos desenvolvedores cadastrados.</p>            
+        </div>
+
+    </div>
+
+</section>
+
+@if (TempData["Email"] != null)
+{
+    <script>
+        alert("@TempData["Email"]");
+        @{ TempData["Email"] = null; }
+    </script>
+}
 
 <script src="/js/index.js"></script>

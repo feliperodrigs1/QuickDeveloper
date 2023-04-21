@@ -7,38 +7,38 @@
     ViewData["Title"] = "ChatBot | QuickDeveloper";
 
     var username = AuthenticateController.Instance.claimsPrincipal.FindFirst("Username").Value;
-    ;  
+    ;
 }
 <link rel="stylesheet" href="/css/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="/css/ChatBot.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-<section class="home" id="home">
 
 
-<section class="home" id="home" style="height: 60%; width: 100%;">
+<section class="home" id="home" style="height: 100%; width: 100%;">
     <div class="content" style="width: 100%;">
         <div id="chat-container">
             <h3>
                 <div id="nome"><span style="color: #ED2218">Quick</span><span style="color: #303457">Chat</span></div>
-                <button id="endcall-button"><i class="fas fa-phone-slash"></i></button>
+                <button id="callbutton">Analisar Requisitos</button>
             </h3>
             <div id="chat-area"></div>
+            <p id="text-finalization">
+                Para finalizar a coleta de dados e prosseguir, pressione o botão vermelho no canto superior direito 'Analizar Requisitos'.
+            </p>
             <div id="input-container" class="input-wrapper">
+
                 <input type="text" id="input" placeholder="Digite aqui mensagem...">
                 <button id="send-button"><i class="fa fa-paper-plane"></i></button>
             </div>
         </div>
 
-        <div class="mb-3">
-            <input type="text" class="form-control" id="MenssageTxt" placeholder="Digite uma Mensagem" required checked/>
 
-            <input type="button" id="Send" class="btn btn-primary mb-2" value="Enviar" onclick="function SendMenssage()" style="float: right" />
-        </div>
-        
     </div>
-
 </section>
 <input type="hidden" id="username" value="@username" />
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/chatbot.js"></script>
+<script src="/js/index.js"></script>

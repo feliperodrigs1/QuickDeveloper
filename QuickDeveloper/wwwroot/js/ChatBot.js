@@ -53,12 +53,12 @@ function endCall() {
     let history = sessionStorage.getItem("history");
     sendRequest(sessionId, user, history, "Verificar");
 
- 
+
 
     setTimeout(() => {//aguarda 0,3segundos
         callButton.disabled = false;
     }, 8000);
-    
+
 };
 
 
@@ -124,7 +124,7 @@ function sendChat() {
             let history = sessionStorage.getItem("history");
             sendRequest(sessionId, user, history, message);
         }
-        
+
     }, 100);
 }
 

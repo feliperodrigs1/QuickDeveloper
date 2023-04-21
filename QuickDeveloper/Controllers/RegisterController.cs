@@ -5,8 +5,7 @@ using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 
 namespace QuickDeveloper.Controllers {
-    public class RegisterController : Microsoft.AspNetCore.Mvc.Controller
-    {
+    public class RegisterController : Microsoft.AspNetCore.Mvc.Controller {
         //Definindo uma variavel padrão para utilizar requisições POST de um Controller para outro
         RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
 
@@ -24,24 +23,22 @@ namespace QuickDeveloper.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Model_User user) {            
-            TempData["User"] = JsonConvert.SerializeObject(user);            
+        public async Task<IActionResult> Login(Model_User user) {
+            TempData["User"] = JsonConvert.SerializeObject(user);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");           
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");
             var content = new StringContent($"{{\r\n \"Email\":\"{user.Email}\",\r\n    \"Password\" : \"{user.Password}\"\r\n}}", null, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
+            if (response.IsSuccessStatusCode) {
                 var responseContent = await response.Content.ReadAsStringAsync();
-              
+
                 JArray jArray = JArray.Parse(responseContent);
 
                 string token = jArray[0]["message"].ToString();
-                
-                var cookieOptions = new CookieOptions
-                {
+
+                var cookieOptions = new CookieOptions {
                     Expires = DateTime.UtcNow.AddDays(1),
                     HttpOnly = true,
                     SameSite = SameSiteMode.Strict,
@@ -54,12 +51,11 @@ namespace QuickDeveloper.Controllers {
                 response.EnsureSuccessStatusCode();
                 return RedirectToAction("Home", "User", routePost);
             }
-            else
-            {               
+            else {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
-            }            
+            }
         }
 
         [HttpPost]
@@ -89,9 +85,8 @@ namespace QuickDeveloper.Controllers {
         }
 
         [System.Web.Mvc.HttpPost]
-        public async Task<IActionResult> RegisterDev(string competences, string aditionalInfo)
-        {
-            Model_User user = deserializeUser(TempData["User"]);            
+        public async Task<IActionResult> RegisterDev(string competences, string aditionalInfo) {
+            Model_User user = deserializeUser(TempData["User"]);
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
@@ -104,7 +99,7 @@ namespace QuickDeveloper.Controllers {
                 $"\"RePassword\" : \"{user.Password}\",\r\n    " +
                 $"\"DataNascimento\" : \"{formattedUserDateTime}\",\r\n    " +
                 $"\"Role\" : \"3\",\r\n   " +
-                $"\"Competencias\" : \"{competences}\", \r\n    " + 
+                $"\"Competencias\" : \"{competences}\", \r\n    " +
                 $"\"InfoAdicionais\" : \"{aditionalInfo}\"\r\n}}", null, "application/json");
 
             request.Content = content;
@@ -115,8 +110,7 @@ namespace QuickDeveloper.Controllers {
             return Json(new { Path = path });
         }
 
-        internal Model_User deserializeUser(dynamic tempData)
-        {
+        internal Model_User deserializeUser(dynamic tempData) {
             return JsonConvert.DeserializeObject<Model_User>((string)tempData);
         }
 
