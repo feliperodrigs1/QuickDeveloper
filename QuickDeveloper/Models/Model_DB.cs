@@ -89,6 +89,8 @@ namespace QuickDeveloper.Models
                 parameters.Add("@EMAIL", datauser.Email);
                 parameters.Add("@COMPETENCES", datauser.Competences);
                 parameters.Add("@ADITIONALINFO", datauser.AditionalInfo);
+                parameters.Add("@BIRTHDATE", datauser.Birthdate);
+
 
                 var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_AlterUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
@@ -100,6 +102,37 @@ namespace QuickDeveloper.Models
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public static List<Model_Requisition> Requisitions(string IdUser, string role)
+        {
+            try
+            {
+                int id = Convert.ToInt32(IdUser);
+
+                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    Model_DB.Instance.sqlConnection.Open();
+                }
+                    
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@IDUSER", id);
+                parameters.Add("@ROLE", role.ToUpper());
+
+                var result = Model_DB.Instance.sqlConnection.Query<Model_Requisition>("spSLN_ShowRequisition", parameters, commandType: CommandType.StoredProcedure).ToList();
+                
+                return (List<Model_Requisition>)result;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
             }
         }
 

@@ -28,6 +28,13 @@ namespace QuickDeveloper.Controllers
             return RedirectToAction("SignIn", "Register", routePost);
         }
 
+        public IActionResult Requisitions()
+        {
+
+            return View();
+
+        }
+
         public IActionResult EditDataUser(Model_View_User user)
         {
             try
