@@ -1,17 +1,32 @@
-﻿@{
+﻿@using Microsoft.IdentityModel.Tokens;
+@using QuickDeveloper.Controllers;
+@using System.IdentityModel.Tokens.Jwt;
+@using System.Security.Claims;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
     ViewData["Title"] = "ChatBot | QuickDeveloper";
-}
 
+    var username = AuthenticateController.Instance.claimsPrincipal.FindFirst("Username").Value;
+    ;  
+}
 <link rel="stylesheet" href="/css/index.css" asp-append-version="true" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 <section class="home" id="home">
 
-    <div class="content" style="height: 90%; width: 90%">
-        
-        <h3><span style="color: #ED2218">Quick</span><span style="color: #303457">Chat</i></span></h3>
-        <div class="mb-4" style="height:60%">
-            <textarea class="form-control" id="Chatbot" style="height: 100%; resize: none" readonly></textarea>
+
+<section class="home" id="home" style="height: 60%; width: 100%;">
+    <div class="content" style="width: 100%;">
+        <div id="chat-container">
+            <h3>
+                <div id="nome"><span style="color: #ED2218">Quick</span><span style="color: #303457">Chat</span></div>
+                <button id="endcall-button"><i class="fas fa-phone-slash"></i></button>
+            </h3>
+            <div id="chat-area"></div>
+            <div id="input-container" class="input-wrapper">
+                <input type="text" id="input" placeholder="Digite aqui mensagem...">
+                <button id="send-button"><i class="fa fa-paper-plane"></i></button>
+            </div>
         </div>
 
         <div class="mb-3">
@@ -23,6 +38,7 @@
     </div>
 
 </section>
+<input type="hidden" id="username" value="@username" />
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/chatbot.js"></script>

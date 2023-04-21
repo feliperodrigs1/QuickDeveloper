@@ -1,0 +1,196 @@
+﻿#chat-area::-webkit-scrollbar {
+    width: 11px !important; /* Largura da scrollbar */
+}
+
+#chat-area::-webkit-scrollbar-thumb {
+    background-color: gray !important; /* Cor de fundo da scrollbar */
+    border-radius: 5px !important; /* Cantos arredondados da scrollbar */
+}
+/* Para esconder as setas da scrollbar */
+#chat-area::-webkit-scrollbar-button {
+    display: none; /*Oculta setas*/
+}
+
+#chat-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+
+
+#chat-container {
+    position: relative;
+    font-family: Arial;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+    #chat-container h3 {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+#nome {
+    font-size: 30px;
+}
+
+
+#chat-area {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    justify-content: flex-start;
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+#input-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+}
+
+#input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/*#endcall-button {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    transform: scaleX(-1);
+}
+
+#end-call:focus {
+    outline: none;
+}*/
+
+
+.chat-bubble {
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    animation: fadeIn .3s ease forwards;
+}
+
+    .chat-bubble.endcall {
+        background-color: #94333a;
+        color: #e5e5e5;
+        align-self: flex-start;
+        max-width: 50%;
+    }
+
+    .chat-bubble.bot {
+        background-color: #303457;
+        color: #e5e5e5;
+        align-self: flex-start;
+        max-width: 50%;
+    }
+
+    .chat-bubble.user {
+        background-color: #e5e5e5;
+        color: #000000;
+        align-self: flex-end;
+        align-self: flex-end;
+        max-width: 50%;
+    }
+
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#input {
+    padding-right: 50px; /* aumenta o espaço para o ícone */
+}
+
+input:focus {
+    outline: none;
+}
+
+#send-button {
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+}
+
+i {
+    font-size: 20px;
+    color: gray;
+}
+
+#callbutton {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    background-color: #94333a;
+    color: #e5e5e5;
+}
+
+
+
+    #callbutton:hover {
+        background-color: #ED2218;
+    }
+
+#text-finalization {
+    font-size: 12px;
+    font-family: calibri;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
