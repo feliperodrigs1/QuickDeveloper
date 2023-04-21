@@ -28,7 +28,7 @@ namespace Services.Services
                 sessionId = Guid.NewGuid();
             }
 
-            string history = $"O chatbot DevBot está coletando requisitos do cliente {request.Name} para o desenvolvimento de um software.\n";
+            string history = $"O ReqMaster está coletando requisitos do cliente {request.Name} para o desenvolvimento de um software.\n";
             if (string.IsNullOrEmpty(request.History) == false)
             {
                 history = request.History;
@@ -50,9 +50,22 @@ namespace Services.Services
                     Message = question,
                 };
             }
-            if (request.Question == "fim")
+
+            if (request.Question == "Verificar") {
+                prompt = history + $"{request.Name}: " + "Liste em topicos separados por '!!-', alguns softwares existentes no mercado que atendam a essas especificações?." + "\nChatbot: ";
+                question = await GenerateQuestion(openAIClient, prompt, sessionId);
+
+                return new Models.ComplementationResponse {
+                    SessionId = sessionId,
+                    Name = request.Name,
+                    History = history + $"{request.Name}: " + request.Question + "\n",
+                    Message = question,
+                };
+            }
+
+            if (request.Question == "Resumo")
             {
-                prompt = history + $"{request.Name}: " + "Mê informe um resumo completo do software que solicitei." + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "de forma breve e sem detalhes, quero que diga somente as ferramentas que devo utilizar para desenvolver este projeto, em topicos separados por '!!-', como linguagem de programação mais indicada, banco de dados, entre outros" + "\nChatbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
                 return new Models.ComplementationResponse
