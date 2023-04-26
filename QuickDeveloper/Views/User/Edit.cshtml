@@ -1,0 +1,77 @@
+﻿@using Microsoft.IdentityModel.Tokens
+@using QuickDeveloper.Controllers
+@using System.Security.Claims
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@model QuickDeveloper.Models.Model_View_User
+@{
+    ViewData["Title"] = "Edit | QuickDeveloper";
+    var token = context.HttpContext.Request.Cookies["token"];
+    var user = AuthenticateController.Instance.claimsPrincipal.FindFirst("id").Value;
+    Model_View_User dataUser = Model_DB.Data_User(user);   
+}
+
+<link rel="stylesheet" href="~/css/user_edit.css" asp-append-version="true" />
+
+<div class="container-user">
+    <div class="title">Informações</div>
+    <br />
+    <div class="content-user">    
+        <form asp-controller="User" asp-action="EditDataUser" method="post">
+            <div class="user-details">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-box">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" value=@dataUser.Username />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="input-box">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" value=@dataUser.Email readonly/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="input-box">
+                    <label asp-for="Birthdate" class="control-label">Data de Nascimento</label>
+                    <input asp-for="Birthdate" class="form-control" type="date" value=@dataUser.Birthdate.ToString("yyyy-MM-dd")/>
+                    <span asp-validation-for="Birthdate" class="text-danger"></span>
+                </div>
+                <div class="input-box">
+                    <label asp-for="RoleName" class="control-label">Tipo de Cadastro</label>
+                    <input asp-for="RoleName" class="form-control" value=@dataUser.RoleName readonly/>
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+
+                @if (dataUser.RoleName == "developer")
+                {
+                    <div class="input-box">
+                        <label asp-for="Competences" class="control-label">Competências</label>
+                        <input asp-for="Competences" class="form-control" value=@dataUser.Competences />
+                        <span asp-validation-for="Competences" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <label asp-for="AditionalInfo" class="control-label">Informações Adicionais</label>
+                        <input asp-for="AditionalInfo" class="form-control" value=@dataUser.AditionalInfo />
+                        <span asp-validation-for="AditionalInfo" class="text-danger"></span>
+                    </div>
+                }
+            
+                <div class="button">
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <script>
+        alert("@TempData["Error"]");
+        @{ TempData["Error"] = null; }
+    </script>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -26,7 +26,7 @@ namespace QuickDeveloper.Controllers
             return jwt;
         }
 
-        public TokenValidationParameters ValidationParameters(string token)
+        public TokenValidationParameters ValidationParameters()
         {            
             var validationParameters = new TokenValidationParameters
             {
@@ -45,7 +45,7 @@ namespace QuickDeveloper.Controllers
             {
                 Instance.httpRequest = request;              
                 string token = Instance.RecoveryToken();
-                TokenValidationParameters validationParameters = Instance.ValidationParameters(token);
+                TokenValidationParameters validationParameters = Instance.ValidationParameters();
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
