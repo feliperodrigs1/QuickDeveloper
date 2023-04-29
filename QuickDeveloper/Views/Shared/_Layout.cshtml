@@ -14,7 +14,7 @@
         TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
         var tokenHandler = new JwtSecurityTokenHandler();
         AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-        roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+        roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value.ToUpper();
     }
 }
 
