@@ -9,12 +9,6 @@ namespace QuickDeveloper.Controllers
     public class UserController : Microsoft.AspNetCore.Mvc.Controller
     {
         RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
-        public IActionResult Home()
-        {
-            Model_User user = JsonConvert.DeserializeObject<Model_User>((string)TempData["User"]);
-
-            return View(user);
-        }
 
         public IActionResult Edit()
         {
@@ -30,9 +24,7 @@ namespace QuickDeveloper.Controllers
 
         public IActionResult Requisitions()
         {
-
             return View();
-
         }
 
         public IActionResult EditDataUser(Model_View_User user)

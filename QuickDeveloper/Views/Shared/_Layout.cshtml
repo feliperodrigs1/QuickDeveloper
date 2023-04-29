@@ -14,7 +14,7 @@
         TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
         var tokenHandler = new JwtSecurityTokenHandler();
         AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-        roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+        roleUser = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value.ToUpper();
     }
 }
 
@@ -39,7 +39,7 @@
             <div class="container-lg align-content-center">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">QuickDeveloper</a>
+                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index"><span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></a>
                     </li>
                 </ul>
                 <div class="navbar-collapse d-sm-inline-flex justify-content-end">
@@ -59,7 +59,7 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Edit">Editar Informações</a>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Requisitions">Requisições</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Requisitions">Minhas Requisições</a>
                                     </li>
                                     <li>
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
@@ -92,7 +92,6 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

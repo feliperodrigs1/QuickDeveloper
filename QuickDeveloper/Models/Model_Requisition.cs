@@ -6,5 +6,7 @@
         public string description { get; set; }
         public string developer { get; set; }
         public string requester { get; set; }
+        public DateTime dateRequisition { get; set; }
+        public string email { get; set; }
     }
 }
