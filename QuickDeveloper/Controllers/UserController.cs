@@ -8,11 +8,45 @@ namespace QuickDeveloper.Controllers
 {
     public class UserController : Microsoft.AspNetCore.Mvc.Controller
     {
+        RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
         public IActionResult Home()
-        { 
+        {
             Model_User user = JsonConvert.DeserializeObject<Model_User>((string)TempData["User"]);
 
             return View(user);
+        }
+
+        public IActionResult Edit()
+        {
+            var jwt = Request.Cookies["token"]?.ToString();
+
+            if (AuthenticateController.VerifyUser(Request))
+            {
+                return View();
+            }
+
+            return RedirectToAction("SignIn", "Register", routePost);
+        }
+
+        public IActionResult Requisitions()
+        {
+
+            return View();
+
+        }
+
+        public IActionResult EditDataUser(Model_View_User user)
+        {
+            try
+            {
+                Model_DB.UpdateData_User(user);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Erro ao alterar as informações!";
+            }
+
+            return View("Edit");
         }
     }
 }

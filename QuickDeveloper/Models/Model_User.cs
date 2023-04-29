@@ -5,6 +5,7 @@
         public string Email { get; set; }
         public DateTime Birthdate { get; set; }
         public int RoleID { get; set; }
+        public string RoleName { get; set; }
         public string Competences { get; set; }
         public string AditionalInfo { get; set; }
     }

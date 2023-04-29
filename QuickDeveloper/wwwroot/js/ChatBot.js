@@ -116,6 +116,7 @@ function sendChat() {
     input.value = ''; // limpa o texbox
     sendMessage(message, 'user'); // chama a função passando a mensagem da variável e o remetente como usuário
     setTimeout(() => { // aguarda 0,3 segundos
+    
         let sessionId = sessionStorage.getItem("sessionId");
 
         if (sessionId == null || sessionId.trim() === '') {

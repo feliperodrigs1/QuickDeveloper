@@ -1,0 +1,72 @@
+﻿@using QuickDeveloper.Controllers;
+@using System.Security.Claims;
+@model IEnumerable<QuickDeveloper.Models.Model_Requisition>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Requisitions | QuickDeveloper";
+    var token = context.HttpContext.Request.Cookies["token"];
+    var user = AuthenticateController.Instance.claimsPrincipal.FindFirst("id").Value;
+    var role = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+    List<Model_Requisition> requistions = Model_DB.Requisitions(user, role);
+    int i = 1;
+}
+
+<h1>Requisitions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName(" ")
+            </th>
+            <th>
+                @Html.DisplayName("Descrição")
+            </th>
+            <th>
+                @Html.DisplayName("Desenvolvedor")
+            </th>
+            <th>
+                @Html.DisplayName("Solicitante")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            
+        @foreach (var item in requistions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => i)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.developer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.requester)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+@if (TempData["Error"] != null)
+{
+    <script>
+        alert("@TempData["Error"]");
+        @{
+            TempData["Error"] = null;
+        }
+    </script>
+}
