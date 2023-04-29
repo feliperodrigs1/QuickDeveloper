@@ -5,10 +5,12 @@ using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
+
 namespace QuickDeveloper.Controllers
 {
     public class RegisterController : Microsoft.AspNetCore.Mvc.Controller
     {
+
         //Definindo uma variavel padrão para utilizar requisições POST de um Controller para outro
         RouteValueDictionary routePost = new RouteValueDictionary { { "httpMethod", "POST" } };
 
@@ -28,22 +30,24 @@ namespace QuickDeveloper.Controllers
         }
 
         [HttpPost]
+
         public async Task<IActionResult> Login(Model_User user)
         {
             TempData["User"] = JsonConvert.SerializeObject(user);            
+
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");
             var content = new StringContent($"{{\r\n \"Email\":\"{user.Email}\",\r\n    \"Password\" : \"{user.Password}\"\r\n}}", null, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
+            if (response.IsSuccessStatusCode) {
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 JArray jArray = JArray.Parse(responseContent);
 
                 string token = jArray[0]["message"].ToString();
+
 
                 var cookieOptions = new CookieOptions
                 {
@@ -104,6 +108,7 @@ namespace QuickDeveloper.Controllers
             }
         }
 
+
         [HttpPost]
         public async Task<IActionResult> RegisterDev(string competences, string aditionalInfo)
         {
@@ -128,12 +133,11 @@ namespace QuickDeveloper.Controllers
             response.EnsureSuccessStatusCode();
 
             TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
-            var path = Url.Action("Index", "Home");           
+            var path = Url.Action("Index", "Home");
             return Json(new { Path = path });
         }
 
-        internal Model_User deserializeUser(dynamic tempData)
-        {
+        internal Model_User deserializeUser(dynamic tempData) {
             return JsonConvert.DeserializeObject<Model_User>((string)tempData);
         }
 

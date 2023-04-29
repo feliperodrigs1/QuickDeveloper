@@ -1,10 +1,10 @@
-﻿﻿#chat-area::-webkit-scrollbar {
-    width: 11px; /* Largura da scrollbar */
+﻿#chat-area::-webkit-scrollbar {
+    width: 11px !important; /* Largura da scrollbar */
 }
 
 #chat-area::-webkit-scrollbar-thumb {
-    background-color: gray; /* Cor de fundo da scrollbar */
-    border-radius: 5px; /* Cantos arredondados da scrollbar */
+    background-color: gray !important; /* Cor de fundo da scrollbar */
+    border-radius: 5px !important; /* Cantos arredondados da scrollbar */
 }
 /* Para esconder as setas da scrollbar */
 #chat-area::-webkit-scrollbar-button {
@@ -69,7 +69,7 @@
     box-sizing: border-box;
 }
 
-#endcall-button {
+/*#endcall-button {
     position: absolute;
     top: 9px;
     right: 8px;
@@ -84,7 +84,7 @@
 
 #end-call:focus {
     outline: none;
-}
+}*/
 
 
 .chat-bubble {
@@ -165,4 +165,32 @@ input:focus {
 i {
     font-size: 20px;
     color: gray;
+}
+
+#callbutton {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    background-color: #94333a;
+    color: #e5e5e5;
+}
+
+
+
+    #callbutton:hover {
+        background-color: #ED2218;
+    }
+
+#text-finalization {
+    font-size: 12px;
+    font-family: calibri;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
