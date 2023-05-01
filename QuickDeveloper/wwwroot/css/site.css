@@ -16,6 +16,29 @@ html {
   }
 }
 
+@media screen and (max-width: 576px) {
+    .navbar-collapse {
+        flex-basis: 0% !important;
+        flex-grow: 0;
+        display: flex;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        position: absolute;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: white;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        right: 0;
+        left: auto;
+    }
+}
+
 html {
   position: relative;
   min-height: 100%;

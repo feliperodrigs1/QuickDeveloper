@@ -46,6 +46,31 @@ namespace QuickDeveloper.Models
             }
 
         }
+        
+        public static Model_View_User UserRequisition(string email)
+        {
+            try
+            {                
+                if (Instance.sqlConnection.State != ConnectionState.Open)
+                {
+                    Instance.sqlConnection.Open();
+                }
+
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@EMAIL", email);
+
+                var user = Instance.sqlConnection.Query<Model_View_User>("spSLN_FindUserByEmail", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
+
+                Instance.sqlConnection.Close();
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public static Model_View_User Data_User(string IdUser)
         {
