@@ -58,8 +58,8 @@ function sendCompetences() {
     let competencesList = document.getElementsByTagName("li");
     let compentecesArray = [];
 
-    for (let i = 0; i < competencesList.length; i++) {
-        compentecesArray.push(competencesList[i].textContent.trim());
+    for (let i = 0; i < competencesList.length; i++) {        
+        compentecesArray.push(competencesList[i].textContent[0].toUpperCase().trim() + competencesList[i].textContent.substr(1).toLowerCase().trim());
     }
 
     let competences = compentecesArray.join(", ");    

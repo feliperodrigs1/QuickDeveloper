@@ -51,21 +51,9 @@ namespace Services.Services
                 };
             }
 
-            if (request.Question == "Verificar") {
-                prompt = history + $"{request.Name}: " + "Liste em topicos separados por '!!-', alguns softwares existentes no mercado que atendam a essas especificações?." + "\nChatbot: ";
-                question = await GenerateQuestion(openAIClient, prompt, sessionId);
-
-                return new Models.ComplementationResponse {
-                    SessionId = sessionId,
-                    Name = request.Name,
-                    History = history + $"{request.Name}: " + request.Question + "\n",
-                    Message = question,
-                };
-            }
-
-            if (request.Question == "Resumo")
+            if (request.Question == "Verificar")
             {
-                prompt = history + $"{request.Name}: " + "de forma breve e sem detalhes, quero que diga somente as ferramentas que devo utilizar para desenvolver este projeto, em topicos separados por '!!-', como linguagem de programação mais indicada, banco de dados, entre outros" + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "Liste em topicos usando o bullet point '-' como indicador da lista e acrescente um <br> ao final de cada tópico, alguns softwares existentes no mercado que atendam a essas especificações." + "\nChatbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
                 return new Models.ComplementationResponse
@@ -76,6 +64,47 @@ namespace Services.Services
                     Message = question,
                 };
             }
+
+            if (request.Question == "Resumo")
+            {
+                prompt = history + $"{request.Name}: " + "quero cite somente as ferramentas que devo utilizar para desenvolver este projeto, usando o bullet point '-' como indicador da lista e acrescente um '<br>' ao final de cada topico, como linguagem de programação mais indicada, banco de dados, entre outros, sem descrição para cada um deles" + "\nChatbot: ";
+                question = await GenerateQuestion(openAIClient, prompt, sessionId);
+                return new Models.ComplementationResponse
+                {
+                    SessionId = sessionId,
+                    Name = request.Name,
+                    History = history + $"{request.Name}: " + request.Question + "\n",
+                    Message = question,
+                };
+            }
+
+            if (request.Question == "lista")
+            {
+                prompt = history + $"{request.Name}: " + "Complete a frase, As linguagens de programação presentes neste escopo de projeto são: " + "\nChatbot: ";
+                question = await GenerateQuestion(openAIClient, prompt, sessionId);
+                return new Models.ComplementationResponse
+                {
+                    SessionId = sessionId,
+                    Name = request.Name,
+                    History = history + $"{request.Name}: " + request.Question + "\n",
+                    Message = question,
+                };
+            }
+
+
+            if (request.Question == "Resumo detalhado")
+            {
+                prompt = history + $"{request.Name}: " + "Complete a frase, o escopo do projeto e seus requisitos são: " + "\nChatbot: ";
+                question = await GenerateQuestion(openAIClient, prompt, sessionId);
+                return new Models.ComplementationResponse
+                {
+                    SessionId = sessionId,
+                    Name = request.Name,
+                    History = history + $"{request.Name}: " + request.Question + "\n",
+                    Message = question,
+                };
+            }
+
             prompt = history + $"{request.Name}: " + request.Question + "\nChatbot: ";
             question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
