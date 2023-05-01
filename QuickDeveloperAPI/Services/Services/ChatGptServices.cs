@@ -94,7 +94,7 @@ namespace Services.Services
 
             if (request.Question == "Resumo detalhado")
             {
-                prompt = history + $"{request.Name}: " + "Quero um resumo detalhado do projeto que foi levantado no chat, com escopo, requisitos, linguagens, regras de négocios e tudo que um deve precisa para desenvolver o software requisitado " + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "Complete a frase, o escopo do projeto e seus requisitos são: " + "\nChatbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
                 return new Models.ComplementationResponse
                 {

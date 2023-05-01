@@ -13,7 +13,7 @@ var userCompetence = "";
 document.addEventListener('DOMContentLoaded', startChat);
 
 /* --------Função para carregar mensagens de boas-vindas---------*/
-function startChat() {
+async function startChat() {
     input.placeholder = "Aguarde um momento";
     input.disabled = true;
     callButton.disabled = true;
@@ -22,7 +22,7 @@ function startChat() {
     let sessionId = sessionStorage.getItem("sessionId");
 
     if (sessionId == null || sessionId.trim() === '') {
-        sendRequest(null, user, null, null);
+        await sendRequest(null, user, null, null);
     } else {
         let sessionHistory = sessionStorage.getItem("sessionHistory");
 
@@ -45,7 +45,7 @@ function startChat() {
     }, 3000);
 }
 
-function Analyze() {
+async function Analyze() {
     tip.textContent = "Para dar continuidade com o projeto e receber um resumo detalhado, pressione o botão azul 'Resumo Técnico' no canto superior direito";
     callButton.innerText = 'Resumo Técnico';
     callButton.style.backgroundColor = '#303457';
@@ -59,13 +59,13 @@ function Analyze() {
 
     let sessionId = sessionStorage.getItem("sessionId");
     let history = sessionStorage.getItem("history");
-    sendRequest(sessionId, user, history, "Verificar");
+    await sendRequest(sessionId, user, history, "Verificar");
 
     callButton.disabled = false;
 
 };
 
-function Resume() {
+async function Resume() {
     chatArea.innerHTML = "";
     callButton.innerText = 'Recrutar Devs';
     tip.textContent = "Para recrutar desenvolvedores, pressione o botão azul 'Recrutar Desenvolvedores' no canto superior direito";
@@ -74,7 +74,7 @@ function Resume() {
     sendMessage('Gerando Resumo Técnico', 'bot');
     let sessionId = sessionStorage.getItem("sessionId");
     let history = sessionStorage.getItem("history");
-    sendRequest(sessionId, user, history, "Resumo");
+    await sendRequest(sessionId, user, history, "Resumo");
 };
 
 
@@ -89,11 +89,13 @@ async function RecDevs() {
 
     sendMessage('Escolha quem fara parte de sua equipe de desenvolvimento', 'bot');
 
+    await sendRequest(sessionId, user, history, "Resumo detalhado");
+
     $.ajax({
         url: "/Chat/ReturnUsersByCompetence",
         type: "POST",
         data: { userCompetence },
-        success: function (listUsers) {        
+        success: function (listUsers) {
             for (let i = 0; i < listUsers.length; i++) {
                 FindDevs(listUsers[i]["id"], listUsers[i]["username"], listUsers[i]["competences"], listUsers[i]["aditionalInfo"]);
             }
@@ -111,13 +113,13 @@ async function RecDevs() {
 
 
 
-function EndCall() {
+async function EndCall() {
     tip.textContent = "Para finalizar a coleta de requesitos, pressione o botão vermelho no canto superior direito";
     callButton.innerText = 'Analisar Requisitos';
     callButton.style.backgroundColor = '#94333a';
     input.value = 'Digite sua menssagem';
     chatArea.innerHTML = "";
-    sendRequest(null, user, null, null);
+    await sendRequest(null, user, null, null);
     input.disabled = false;
 };
 
@@ -140,7 +142,7 @@ callButton.addEventListener('click', function () {
     }
 });
 
-async function FindDevs(vid, vname, vcompetences, vinfos) {
+function FindDevs(vid, vname, vcompetences, vinfos) {
     const idDeveloper = vid;
     const name = vname;
     const competences = vcompetences;
@@ -153,8 +155,7 @@ async function FindDevs(vid, vname, vcompetences, vinfos) {
     sendMessage(message, 'bot');
 
     const recruitButton = document.getElementById(`dev-${idDeveloper}`);
-    recruitButton.addEventListener('click', () => {
-        await sendRequest(sessionId, user, history, "Resumo detalhado");
+    recruitButton.addEventListener('click', () => {        
         let idUser = 19;
         $.ajax({
             url: "/Chat/RegisterRequisition",
@@ -162,7 +163,7 @@ async function FindDevs(vid, vname, vcompetences, vinfos) {
             data: { idDeveloper, description, idUser },
             success: function (result){
                 if (result == true) {
-                    sendMessage('Requisição cadastrada com sucesso, aguarde que o desenvolvedor seleciona irá entrar em contato com você!', 'bot');
+                    sendMessage('Requisição cadastrada com sucesso, aguarde que o desenvolvedor selecionado irá entrar em contato com você!', 'bot');
                 } else {
                     sendMessage('Tivemos um problema ao cadastrar sua requisição, tente novamente!', 'bot');
                 }
@@ -246,7 +247,7 @@ function sendHistory(message, sender) { //recebe a mensagem a postar na tela e q
     chatArea.scrollTop = chatArea.scrollHeight; //faz a barra de rolagem acompanhar a ultima menssagem digitada
 }
 
-async function sendRequest(sessionId, name, history, messsage) { //recebe a mensagem a postar na tela e quem é o remetente
+async function sendRequest(sessionId, name, history, message) { //recebe a mensagem a postar na tela e quem é o remetente
     await fetch('http://localhost:5126/api/ChatGpt/CreateComplementation', {
         method: 'POST',
         headers: {
@@ -256,7 +257,7 @@ async function sendRequest(sessionId, name, history, messsage) { //recebe a mens
             sessionId: sessionId ?? "",
             name: name,
             history: history ?? "",
-            question: messsage ?? "",
+            question: message ?? "",
         })
     })
         .then(response => response.json())
@@ -277,7 +278,7 @@ async function sendRequest(sessionId, name, history, messsage) { //recebe a mens
             sessionStorage.setItem("history", customReturn.data.history);
             sessionStorage.setItem("message", customReturn.data.message);
 
-            if (messsage === "lista") {
+            if (message === "lista") {
                 userCompetence = customReturn.data.message;
             } else if (message === "Resumo detalhado"){
                 description = customReturn.data.message;

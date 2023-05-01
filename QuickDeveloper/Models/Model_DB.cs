@@ -37,7 +37,7 @@ namespace QuickDeveloper.Models
                 parameters.Add("@IDREQUISITION", requisition.idRequisition);
                 parameters.Add("@DESCRIPTION", requisition.description);
 
-                var result = Model_DB.Instance.sqlConnection.Query<Model_View_User>("spSLN_InsertUpdateRequisition", parameters, commandType: CommandType.StoredProcedure);
+                var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_InsertUpdateRequisition", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
                 Convert.ToInt32(result);
 
