@@ -21,7 +21,7 @@ namespace QuickDeveloper.Models
             sqlConnection = new SqlConnection(_configuration.GetConnectionString("Connection"));
         }
 
-        public static void Register_Requisition(int IdUser, int IdDev, int idRequisition, string Description)
+        public static bool Register_Requisition(Model_Requisition requisition)
         {
             try
             {
@@ -32,19 +32,23 @@ namespace QuickDeveloper.Models
                 SqlCommand sqlCommand = new SqlCommand("spSLN_InsertUpdateRequisition", Model_DB.Instance.sqlConnection);
                 var parameters = new DynamicParameters();
 
-                parameters.Add("@IDDEV", IdUser);
-                parameters.Add("@IDUSER", IdDev);
-                parameters.Add("@IDREQUISITION", idRequisition);
-                parameters.Add("@DESCRIPTION", Description);
+                parameters.Add("@IDDEV", requisition.idDeveloper);
+                parameters.Add("@IDUSER", requisition.idUser);
+                parameters.Add("@IDREQUISITION", requisition.idRequisition);
+                parameters.Add("@DESCRIPTION", requisition.description);
 
                 var result = Model_DB.Instance.sqlConnection.Query<Model_View_User>("spSLN_InsertUpdateRequisition", parameters, commandType: CommandType.StoredProcedure);
 
+                Convert.ToInt32(result);
+
                 Model_DB.Instance.sqlConnection.Close();
+
+                return true;
             }catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message);                
             }
-
+            
         }
 
         public static Model_View_User Data_User(string IdUser)
@@ -124,6 +128,36 @@ namespace QuickDeveloper.Models
                 var result = Model_DB.Instance.sqlConnection.Query<Model_Requisition>("spSLN_ShowRequisition", parameters, commandType: CommandType.StoredProcedure).ToList();
                 
                 return (List<Model_Requisition>)result;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
+            }
+        }
+
+        public static List<Model_View_User_Competences> UserByCompetence(string competences)
+        {
+            try
+            {
+
+                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    Model_DB.Instance.sqlConnection.Open();
+                }
+
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@COMPETENCES", competences.Replace('e',',').Replace('.',' ').ToUpper());
+
+
+                var result = Model_DB.Instance.sqlConnection.Query<Model_View_User_Competences>("spSLN_FindUser_by_Competence", parameters, commandType: CommandType.StoredProcedure).ToList();
+
+                return (List<Model_View_User_Competences>)result;
 
             }
             catch (Exception ex)

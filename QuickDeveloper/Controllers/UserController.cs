@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using QuickDeveloper.Models;
@@ -30,10 +31,11 @@ namespace QuickDeveloper.Controllers
 
         public IActionResult Requisitions()
         {
-
             return View();
-
         }
+
+      
+
 
         public IActionResult EditDataUser(Model_View_User user)
         {

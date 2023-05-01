@@ -5,7 +5,9 @@ const callButton = document.getElementById('callbutton');
 const button = document.querySelector('.chat-button');
 const tip = document.getElementById("text-finalization");
 var user = document.getElementById("username").value;
+var description = "";
 var messagelast = "";
+var userCompetence = "";
 
 /---------- Adiciona um listener ao evento DOMContentLoaded ----------/
 document.addEventListener('DOMContentLoaded', startChat);
@@ -83,17 +85,25 @@ async function RecDevs() {
     //alert(array);
     let sessionId = sessionStorage.getItem("sessionId");
     let history = sessionStorage.getItem("history");
-    let result = await sendRequest(sessionId, user, history, "Resumo");
-    //sendRequest(sessionId, user, history, "lista");
+    await sendRequest(sessionId, user, history, "lista");
+
+    sendMessage('Escolha quem fara parte de sua equipe de desenvolvimento', 'bot');
+
+    $.ajax({
+        url: "/Chat/ReturnUsersByCompetence",
+        type: "POST",
+        data: { userCompetence },
+        success: function (listUsers) {        
+            for (let i = 0; i < listUsers.length; i++) {
+                FindDevs(listUsers[i]["id"], listUsers[i]["username"], listUsers[i]["competences"], listUsers[i]["aditionalInfo"]);
+            }
+        }
+    });
 
     tip.textContent = "Para encerrar a chamada e iniciar uma nova, pressione o botão verde 'Finalizar Chamada' no canto superior direito";
     callButton.innerText = 'Finalizar Chamada';
     callButton.style.backgroundColor = '#057507';
-    input.value = '';
-    sendMessage('Escolha quem fara parte de sua equipe de desenvolvimento', 'bot');
-    FindDevs('0', 'Fred', 'C#, Java');
-    FindDevs('1', 'Jorge', 'Html, Java');
-    FindDevs('2', 'Astolfo', 'Ruby, Cobol');
+    input.value = ''; 
 
 
 };
@@ -130,21 +140,34 @@ callButton.addEventListener('click', function () {
     }
 });
 
-function FindDevs(vid, vname, vcompetences) {
-    const id = vid;
+async function FindDevs(vid, vname, vcompetences, vinfos) {
+    const idDeveloper = vid;
     const name = vname;
     const competences = vcompetences;
+    const info = vinfos;
 
     const div = document.createElement('div');
-    div.innerHTML = `<span class="recruitMessage">Desenvolvedor: ${name}<br>Competências: ${competences}<br></span><button class="recruit" id="dev-${id}">Recrutar</button>`;
+    div.innerHTML = `<span class="recruitMessage">Desenvolvedor: ${name}<br>Competências: ${competences}<br><br>Informações Adicionais: ${info}<br></span><button class="recruit" id="dev-${idDeveloper}">Recrutar</button>`;
 
     const message = div.outerHTML;
     sendMessage(message, 'bot');
 
-    const recruitButton = document.getElementById(`dev-${id}`);
+    const recruitButton = document.getElementById(`dev-${idDeveloper}`);
     recruitButton.addEventListener('click', () => {
-        const className = recruitButton.parentElement.classList[0];
-        alert(name);
+        await sendRequest(sessionId, user, history, "Resumo detalhado");
+        let idUser = 19;
+        $.ajax({
+            url: "/Chat/RegisterRequisition",
+            type: "POST",
+            data: { idDeveloper, description, idUser },
+            success: function (result){
+                if (result == true) {
+                    sendMessage('Requisição cadastrada com sucesso, aguarde que o desenvolvedor seleciona irá entrar em contato com você!', 'bot');
+                } else {
+                    sendMessage('Tivemos um problema ao cadastrar sua requisição, tente novamente!', 'bot');
+                }
+            }
+        });
     });
 }
 
@@ -254,10 +277,12 @@ async function sendRequest(sessionId, name, history, messsage) { //recebe a mens
             sessionStorage.setItem("history", customReturn.data.history);
             sessionStorage.setItem("message", customReturn.data.message);
 
-           /* if (messsage === "lista") {
-                return customReturn.data.message;
+            if (messsage === "lista") {
+                userCompetence = customReturn.data.message;
+            } else if (message === "Resumo detalhado"){
+                description = customReturn.data.message;
             }
-            */
+            
             sendMessage(customReturn.data.message, "bot");
         })
         .catch(error => {

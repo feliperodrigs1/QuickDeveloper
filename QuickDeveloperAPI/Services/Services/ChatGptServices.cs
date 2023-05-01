@@ -90,6 +90,21 @@ namespace Services.Services
                     Message = question,
                 };
             }
+
+
+            if (request.Question == "Resumo detalhado")
+            {
+                prompt = history + $"{request.Name}: " + "Quero um resumo detalhado do projeto que foi levantado no chat, com escopo, requisitos, linguagens, regras de négocios e tudo que um deve precisa para desenvolver o software requisitado " + "\nChatbot: ";
+                question = await GenerateQuestion(openAIClient, prompt, sessionId);
+                return new Models.ComplementationResponse
+                {
+                    SessionId = sessionId,
+                    Name = request.Name,
+                    History = history + $"{request.Name}: " + request.Question + "\n",
+                    Message = question,
+                };
+            }
+
             prompt = history + $"{request.Name}: " + request.Question + "\nChatbot: ";
             question = await GenerateQuestion(openAIClient, prompt, sessionId);
 

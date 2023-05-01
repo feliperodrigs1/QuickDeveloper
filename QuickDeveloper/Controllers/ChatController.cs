@@ -15,5 +15,35 @@ namespace QuickDeveloper.Controllers {
 
             return View();
         }
+
+        [HttpPost]
+        public List<Model_View_User_Competences> ReturnUsersByCompetence(string userCompetence)
+        {
+            try
+            {
+                List<Model_View_User_Competences> listUsers = Model_DB.UserByCompetence(userCompetence);
+
+                return listUsers;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public bool RegisterRequisition(Model_Requisition requisition)
+        {
+            try
+            {
+                bool registro = Model_DB.Register_Requisition(requisition);
+
+                return registro;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
