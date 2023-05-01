@@ -40,7 +40,6 @@ namespace QuickDeveloper.Controllers
             }
         }
 
-        //[Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();

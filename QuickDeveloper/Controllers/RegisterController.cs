@@ -61,11 +61,11 @@ namespace QuickDeveloper.Controllers
 
 
                 response.EnsureSuccessStatusCode();
-                return RedirectToAction("Home", "User", routePost);
+
+                return RedirectToAction("Requisitions", "User", routePost);
             }
             else
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
                 TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
             }
@@ -95,7 +95,8 @@ namespace QuickDeveloper.Controllers
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("SignIn", "Register", routePost);
+                TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
+                return RedirectToAction("Index", "Home", routePost);
             }
             else
             {

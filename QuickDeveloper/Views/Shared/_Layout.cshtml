@@ -32,6 +32,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="/img/index/favicon.ico"/>
 </head>
 <body>
     <header>
@@ -39,7 +40,7 @@
             <div class="container-lg align-content-center">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">QuickDeveloper</a>
+                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index"><span style="color: #ED2218">Quick</span><span style="color: #303457">Developer</span></a>
                     </li>
                 </ul>
                 <div class="navbar-collapse d-sm-inline-flex justify-content-end">
@@ -59,7 +60,7 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Edit">Editar Informações</a>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Requisitions">Requisições</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Requisitions">Minhas Requisições</a>
                                     </li>
                                     <li>
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
@@ -87,12 +88,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - QuickDeveloper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - QuickDeveloper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Termos de Uso</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
