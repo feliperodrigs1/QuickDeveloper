@@ -1,10 +1,20 @@
-﻿@using QuickDeveloper.Controllers;
+﻿@using System.IdentityModel.Tokens.Jwt;
+@using Microsoft.IdentityModel.Tokens;
+@using QuickDeveloper.Controllers;
 @using System.Security.Claims;
 @model IEnumerable<QuickDeveloper.Models.Model_Requisition>
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @{
     ViewData["Title"] = "Requisitions | QuickDeveloper";
     var token = context.HttpContext.Request.Cookies["token"];
+
+    if (AuthenticateController.Instance.claimsPrincipal == null)
+    {
+        TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
+        var tokenHandler = new JwtSecurityTokenHandler();
+        AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+    }
+
     var user = AuthenticateController.Instance.claimsPrincipal.FindFirst("id").Value;
     var role = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value.ToUpper();
     List<Model_Requisition> requisitions = Model_DB.Requisitions(user, role);
