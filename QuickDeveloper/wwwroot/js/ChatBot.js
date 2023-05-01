@@ -156,7 +156,6 @@ function FindDevs(vid, vname, vcompetences, vinfos) {
 
     const recruitButton = document.getElementById(`dev-${idDeveloper}`);
     recruitButton.addEventListener('click', () => {        
-        let idUser = 19;
         $.ajax({
             url: "/Chat/RegisterRequisition",
             type: "POST",

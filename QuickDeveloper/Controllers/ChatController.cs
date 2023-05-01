@@ -36,6 +36,10 @@ namespace QuickDeveloper.Controllers {
         {
             try
             {
+                var id = AuthenticateController.Instance.claimsPrincipal.FindFirst("id").Value;
+
+                requisition.idUser = Convert.ToInt32(id);
+
                 bool registro = Model_DB.Register_Requisition(requisition);
 
                 return registro;

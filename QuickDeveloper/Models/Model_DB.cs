@@ -29,7 +29,7 @@ namespace QuickDeveloper.Models
                 {
                     Model_DB.Instance.sqlConnection.Open();
                 }
-                SqlCommand sqlCommand = new SqlCommand("spSLN_InsertUpdateRequisition", Model_DB.Instance.sqlConnection);
+                
                 var parameters = new DynamicParameters();
 
                 parameters.Add("@IDDEV", requisition.idDeveloper);
