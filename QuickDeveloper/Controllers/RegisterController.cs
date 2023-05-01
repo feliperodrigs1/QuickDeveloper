@@ -62,7 +62,6 @@ namespace QuickDeveloper.Controllers
             }
             else
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
                 TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
             }

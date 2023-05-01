@@ -27,6 +27,13 @@ namespace QuickDeveloper.Controllers
             return View();
         }
 
+        [HttpPost]
+        public Model_View_User FindUserByEmail(string email)
+        {
+            Model_View_User dataUser = Model_DB.UserRequisition(email);
+            return dataUser;   
+        }
+
         public IActionResult EditDataUser(Model_View_User user)
         {
             try
