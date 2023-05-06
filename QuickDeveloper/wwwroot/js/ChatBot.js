@@ -41,7 +41,7 @@ async function startChat() {
         input.disabled = false;
         callButton.disabled = false;
         sendButton.disabled = false;
-        input.placeholder = "Digite sua menssagem";
+        input.placeholder = "Digite sua mensagem";
     }, 3000);
 }
 
@@ -62,7 +62,6 @@ async function Analyze() {
     await sendRequest(sessionId, user, history, "Verificar");
 
     callButton.disabled = false;
-
 };
 
 async function Resume() {
@@ -106,10 +105,7 @@ async function RecDevs() {
     callButton.innerText = 'Finalizar Chamada';
     callButton.style.backgroundColor = '#057507';
     input.value = ''; 
-
-
 };
-
 
 
 
@@ -117,7 +113,7 @@ async function EndCall() {
     tip.textContent = "Para finalizar a coleta de requesitos, pressione o botão vermelho no canto superior direito";
     callButton.innerText = 'Analisar Requisitos';
     callButton.style.backgroundColor = '#94333a';
-    input.value = 'Digite sua menssagem';
+    input.placeholder = 'Digite sua mensagem';
     chatArea.innerHTML = "";
     await sendRequest(null, user, null, null);
     input.disabled = false;
@@ -243,7 +239,7 @@ function sendHistory(message, sender) { //recebe a mensagem a postar na tela e q
     }
 
     chatArea.appendChild(chatBubble); //Adiciona a nova div criada no final da tela do chat
-    chatArea.scrollTop = chatArea.scrollHeight; //faz a barra de rolagem acompanhar a ultima menssagem digitada
+    chatArea.scrollTop = chatArea.scrollHeight; //faz a barra de rolagem acompanhar a ultima mensagem digitada
 }
 
 async function sendRequest(sessionId, name, history, message) { //recebe a mensagem a postar na tela e quem é o remetente

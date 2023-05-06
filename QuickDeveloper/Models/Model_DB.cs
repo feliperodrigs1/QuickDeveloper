@@ -177,8 +177,7 @@ namespace QuickDeveloper.Models
 
                 var parameters = new DynamicParameters();
 
-                parameters.Add("@COMPETENCES", competences.Replace('e',',').Replace('.',' ').ToUpper());
-
+                parameters.Add("@COMPETENCES", competences.Replace('e',',').Replace('.',' ').ToUpper().Trim());
 
                 var result = Model_DB.Instance.sqlConnection.Query<Model_View_User_Competences>("spSLN_FindUser_by_Competence", parameters, commandType: CommandType.StoredProcedure).ToList();
 
