@@ -28,7 +28,7 @@ namespace Services.Services
                 sessionId = Guid.NewGuid();
             }
 
-            string history = $"O ReqMaster está coletando requisitos do cliente {request.Name} para o desenvolvimento de um software.\n";
+            string history = $"O QuickBot está coletando requisitos do cliente {request.Name} para o desenvolvimento de um software.\n";
             if (string.IsNullOrEmpty(request.History) == false)
             {
                 history = request.History;
@@ -39,7 +39,7 @@ namespace Services.Services
 
             if (string.IsNullOrEmpty(request.Question))
             {
-                prompt = history + "Chatbot: ";
+                prompt = history + "QuickBot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
                 return new Models.ComplementationResponse
@@ -53,7 +53,7 @@ namespace Services.Services
 
             if (request.Question == "Verificar")
             {
-                prompt = history + $"{request.Name}: " + "Liste em topicos usando o bullet point '-' como indicador da lista e acrescente um <br> ao final de cada tópico, alguns softwares existentes no mercado que atendam a essas especificações." + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "Liste em topicos usando o bullet point '-' como indicador da lista e acrescente um <br> ao final de cada tópico, alguns softwares existentes no mercado que atendam a essas especificações." + "\nQuickbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
                 return new Models.ComplementationResponse
@@ -67,7 +67,7 @@ namespace Services.Services
 
             if (request.Question == "Resumo")
             {
-                prompt = history + $"{request.Name}: " + "quero cite somente as ferramentas que devo utilizar para desenvolver este projeto, usando o bullet point '-' como indicador da lista e acrescente um '<br>' ao final de cada topico, como linguagem de programação mais indicada, banco de dados, entre outros, sem descrição para cada um deles" + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "quero que cite somente as ferramentas que devo utilizar para desenvolver este projeto, usando o bullet point '-' como indicador da lista e acrescente um '<br>' ao final de cada topico, como linguagem de programação mais indicada, banco de dados, entre outros, sem descrição para cada um deles" + "\nQuickbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
                 return new Models.ComplementationResponse
                 {
@@ -80,7 +80,7 @@ namespace Services.Services
 
             if (request.Question == "lista")
             {
-                prompt = history + $"{request.Name}: " + "Complete a frase, As linguagens de programação presentes neste escopo de projeto são: " + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "Complete a frase, As linguagens de programação presentes neste escopo de projeto são: " + "\nQuickbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
                 return new Models.ComplementationResponse
                 {
@@ -94,7 +94,7 @@ namespace Services.Services
 
             if (request.Question == "Resumo detalhado")
             {
-                prompt = history + $"{request.Name}: " + "Complete a frase, o escopo do projeto e seus requisitos são: " + "\nChatbot: ";
+                prompt = history + $"{request.Name}: " + "Complete a frase, o escopo do projeto e seus requisitos são: " + "\nQuickbot: ";
                 question = await GenerateQuestion(openAIClient, prompt, sessionId);
                 return new Models.ComplementationResponse
                 {
@@ -105,7 +105,7 @@ namespace Services.Services
                 };
             }
 
-            prompt = history + $"{request.Name}: " + request.Question + "\nChatbot: ";
+            prompt = history + $"{request.Name}: " + request.Question + "\nQuickbot: ";
             question = await GenerateQuestion(openAIClient, prompt, sessionId);
 
             return new Models.ComplementationResponse

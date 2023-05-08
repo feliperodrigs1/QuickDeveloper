@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{02C32841-CBAD-4234-A481-0DDF38DEF2E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Services", "02 - Services", "{1928516E-C117-48F2-9D04-CEBD2C028E04}"
+	ProjectSection(SolutionItems) = preProject
+		Application\Program.cs = Application\Program.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Api", "01 - Api", "{9E6C4DD2-F44A-44E2-BD44-B318A80994A9}"
 EndProject
