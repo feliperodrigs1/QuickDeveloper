@@ -51,7 +51,7 @@ async function Analyze() {
     callButton.style.backgroundColor = '#303457';
     input.value = '';
     sendMessage("Analisando Requisitos", 'bot');
-    sendMessage("Aqui está alguns softwares ja existentes no mercado que podem ajudar com seu problema", 'bot');
+    sendMessage("Aqui estão alguns softwares já existentes no mercado que podem ajudar com seu problema:", 'bot');
     input.placeholder = "Chamada encerrada";
     input.disabled = true;
     callButton.disabled = false;
@@ -110,7 +110,7 @@ async function RecDevs() {
 
 
 async function EndCall() {
-    tip.textContent = "Para finalizar a coleta de requesitos, pressione o botão vermelho no canto superior direito";
+    tip.textContent = "Para finalizar a coleta de requisitos, pressione o botão vermelho no canto superior direito";
     callButton.innerText = 'Analisar Requisitos';
     callButton.style.backgroundColor = '#94333a';
     input.placeholder = 'Digite sua mensagem';
@@ -158,7 +158,7 @@ function FindDevs(vid, vname, vcompetences, vinfos) {
             data: { idDeveloper, description, idUser },
             success: function (result){
                 if (result == true) {
-                    sendMessage('Requisição cadastrada com sucesso, aguarde que o desenvolvedor selecionado irá entrar em contato com você!', 'bot');
+                    sendMessage("Requisição cadastrada com sucesso, você poderá entrar em contato com o desenvolvedor na tela de 'Minhas Requisições'!", 'bot');
                 } else {
                     sendMessage('Tivemos um problema ao cadastrar sua requisição, tente novamente!', 'bot');
                 }

@@ -48,7 +48,7 @@
 @if (TempData["Email"] != null)
 {
     <script>
-        alert("@TempData["Email"]");
+        alert("@Html.Raw(TempData["Email"])");
         @{ TempData["Email"] = null; }
     </script>
 }

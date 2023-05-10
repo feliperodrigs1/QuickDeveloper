@@ -155,10 +155,8 @@
 @if (TempData["Error"] != null)
 {
     <script>
-        alert("@TempData["Error"]");
-        @{
-            TempData["Error"] = null;
-        }
+        alert("@Html.Raw(TempData["Error"])");
+        @{ TempData["Error"] = null; }
     </script>
 }
 

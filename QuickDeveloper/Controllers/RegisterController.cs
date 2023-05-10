@@ -35,7 +35,6 @@ namespace QuickDeveloper.Controllers
         {
             TempData["User"] = JsonConvert.SerializeObject(user);            
 
-
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/login");
             var content = new StringContent($"{{\r\n \"Email\":\"{user.Email}\",\r\n    \"Password\" : \"{user.Password}\"\r\n}}", null, "application/json");
             request.Content = content;
@@ -66,7 +65,7 @@ namespace QuickDeveloper.Controllers
             }
             else
             {
-                TempData["Error"] = "Email ou/e Senha invalido(s). Tente novamente!";
+                TempData["Error"] = "Email ou/e Senha inválido(s). Tente novamente!";
                 return RedirectToAction("SignIn", "Register", routePost);
             }
         }
@@ -74,25 +73,22 @@ namespace QuickDeveloper.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(Model_User user, IFormCollection form)
         {
-            bool dev = !string.IsNullOrEmpty(form["dev"]);
-
             TempData["User"] = JsonConvert.SerializeObject(user);
 
-            string formattedUserDateTime = user.Birthdate.ToString("yyyy-MM-ddTHH:mm:ss");
+            bool dev = !string.IsNullOrEmpty(form["dev"]);
 
             if (dev) return RedirectToAction("Competences", "Register", routePost);
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
-            var content = new StringContent(
-                $"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
-                $"\"Email\":\"{user.Email}\",\r\n    " +
-                $"\"Password\" : \"{user.Password}\",\r\n    " +
-                $"\"RePassword\" : \"{user.Password}\",\r\n    " +
-                $"\"Birthdate\" : \"{formattedUserDateTime}\",\r\n    " +
-                $"\"Role\" : \"2\"\r\n}}", null, "application/json");
 
+            user.Role = "2";
+            user.RePassword = user.Password;
+            var json = JsonConvert.SerializeObject(user);          
+
+            var content = new StringContent(json, null, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
+
             if (response.IsSuccessStatusCode)
             {
                 TempData["Email"] = "Verifique seu e-mail para confirmar o cadastro!";
@@ -104,7 +100,7 @@ namespace QuickDeveloper.Controllers
 
                 JArray jArray = JArray.Parse(responseContent);
 
-                TempData["Error"] = Regex.Replace(jArray[0]["message"].ToString(), "[^a-zA-Z0-9\\s]+", "");
+                TempData["Error"] = jArray[0]["message"].ToString();
                 return RedirectToAction("SignIn", "Register", routePost);
             }
         }
@@ -117,19 +113,18 @@ namespace QuickDeveloper.Controllers
 
             TempData["User"] = JsonConvert.SerializeObject(user);
 
-            string formattedUserDateTime = user.Birthdate.ToString("yyyy-MM-ddTHH:mm:ss");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "http://164.152.196.151/cadastro");
-            var content = new StringContent($"{{\r\n    \"Username\" : \"{user.Username}\",\r\n    " +
-                $"\"Email\":\"{user.Email}\",\r\n    " +
-                $"\"Password\" : \"{user.Password}\",\r\n    " +
-                $"\"RePassword\" : \"{user.Password}\",\r\n    " +
-                $"\"Birthdate\" : \"{formattedUserDateTime}\",\r\n    " +
-                $"\"Role\" : \"3\",\r\n   " +
-                $"\"Competences\" : \"{competences}\", \r\n    " +
-                $"\"AditionalInfo\" : \"{aditionalInfo}\"\r\n}}", null, "application/json");
 
+            user.Competences = competences;
+            user.AditionalInfo = aditionalInfo;
+            user.Role = "3";
+            user.RePassword = user.Password;          
+
+            var json = JsonConvert.SerializeObject(user);
+
+            var content = new StringContent(json, null, "application/json");
             request.Content = content;
+
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 

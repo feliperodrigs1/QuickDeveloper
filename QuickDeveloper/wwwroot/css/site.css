@@ -75,3 +75,8 @@ a.logo {
     font-weight: 400;
     font-family: 'QuickSand', sans-serif;
 }
+
+::selection {
+    background-color: auto;
+    color: auto;
+}
