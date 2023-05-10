@@ -165,7 +165,7 @@ function FindDevs(vid, vname, vcompetences, vinfos) {
 
 /*---------- Evento de clicar no botão de enviar --------*/
 sendButton.addEventListener('click', sendChat);
-/*---------- Evento precionar enter e enviar --------*/
+/*---------- Evento pressionar enter e enviar --------*/
 input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         sendChat();
