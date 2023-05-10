@@ -78,10 +78,6 @@ async function Resume() {
 
 
 async function RecDevs() {
-    //const frase = messagelast;
-    //const array = frase.split('<br>').map(item => item.trim().slice(item.indexOf(':') + 1));
-    //console.log(array);
-    //alert(array);
     let sessionId = sessionStorage.getItem("sessionId");
     let history = sessionStorage.getItem("history");
     await sendRequest(sessionId, user, history, "lista");
@@ -167,12 +163,12 @@ function FindDevs(vid, vname, vcompetences, vinfos) {
     });
 }
 
-/---------- Evento de clicar no botão de enviar --------/
+/*---------- Evento de clicar no botão de enviar --------*/
 sendButton.addEventListener('click', sendChat);
-/---------- Evento precionar enter e enviar --------/
+/*---------- Evento pressionar enter e enviar --------*/
 input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        sendChat(); 
+        sendChat();
     }
 });
 /--------- Função capturar a mensagem e enviar para o chat --------------/
