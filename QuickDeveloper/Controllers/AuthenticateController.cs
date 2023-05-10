@@ -22,8 +22,7 @@ namespace QuickDeveloper.Controllers
 
         public string RecoveryToken()
         {
-            var jwt = httpRequest.Cookies["token"]?.ToString();
-            return jwt;
+            return httpRequest.Cookies["token"]?.ToString();            
         }
 
         public TokenValidationParameters ValidationParameters()

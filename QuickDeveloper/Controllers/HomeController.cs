@@ -29,9 +29,9 @@ namespace QuickDeveloper.Controllers
             string decodedInput = HttpUtility.UrlEncode(code);
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://164.152.196.151/ativa?UsuarioId={id}&CodigoDeAtivacao={decodedInput}");
             var response = await client.SendAsync(request);
+
             if (response.IsSuccessStatusCode)
-            {
-                
+            {                
                 return View();
             }
             else

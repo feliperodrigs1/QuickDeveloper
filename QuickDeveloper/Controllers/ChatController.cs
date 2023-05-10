@@ -40,9 +40,9 @@ namespace QuickDeveloper.Controllers {
 
                 requisition.idUser = Convert.ToInt32(id);
 
-                bool registro = Model_DB.Register_Requisition(requisition);
+                bool registered = Model_DB.Register_Requisition(requisition);
 
-                return registro;
+                return registered;
             }
             catch (Exception ex)
             {
