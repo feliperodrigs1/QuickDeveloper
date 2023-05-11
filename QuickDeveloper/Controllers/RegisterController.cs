@@ -30,7 +30,6 @@ namespace QuickDeveloper.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Login(Model_User user)
         {
             TempData["User"] = JsonConvert.SerializeObject(user);            
@@ -47,7 +46,8 @@ namespace QuickDeveloper.Controllers
             request.Content = content;
             var response = await client.SendAsync(request);
 
-            if (response.IsSuccessStatusCode) {
+            if (response.IsSuccessStatusCode) 
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 JArray jArray = JArray.Parse(responseContent);
@@ -138,7 +138,8 @@ namespace QuickDeveloper.Controllers
             return Json(new { Path = path });
         }
 
-        internal Model_User deserializeUser(dynamic tempData) {
+        internal Model_User deserializeUser(dynamic tempData) 
+        {
             return JsonConvert.DeserializeObject<Model_User>((string)tempData);
         }
 

@@ -17,6 +17,7 @@ namespace QuickDeveloper.Models
             var builder = new ConfigurationBuilder()
                        .SetBasePath(Directory.GetCurrentDirectory())
                        .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true);
+
             IConfiguration _configuration = builder.Build();
             sqlConnection = new SqlConnection(_configuration.GetConnectionString("Connection"));
         }
@@ -44,11 +45,11 @@ namespace QuickDeveloper.Models
                 Model_DB.Instance.sqlConnection.Close();
 
                 return true;
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message);                
-            }
-            
+            }            
         }
         
         public static Model_View_User UserRequisition(string email)
@@ -126,7 +127,6 @@ namespace QuickDeveloper.Models
                 Model_DB.Instance.sqlConnection.Close();
 
                 Convert.ToInt32(result);
-
             }
             catch (Exception ex)
             {
@@ -153,7 +153,6 @@ namespace QuickDeveloper.Models
                 var result = Model_DB.Instance.sqlConnection.Query<Model_Requisition>("spSLN_ShowRequisition", parameters, commandType: CommandType.StoredProcedure).ToList();
                 
                 return (List<Model_Requisition>)result;
-
             }
             catch (Exception ex)
             {
@@ -169,7 +168,6 @@ namespace QuickDeveloper.Models
         {
             try
             {
-
                 if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
                 {
                     Model_DB.Instance.sqlConnection.Open();
@@ -182,7 +180,6 @@ namespace QuickDeveloper.Models
                 var result = Model_DB.Instance.sqlConnection.Query<Model_View_User_Competences>("spSLN_FindUser_by_Competence", parameters, commandType: CommandType.StoredProcedure).ToList();
 
                 return (List<Model_View_User_Competences>)result;
-
             }
             catch (Exception ex)
             {
@@ -193,8 +190,5 @@ namespace QuickDeveloper.Models
                 Model_DB.Instance.sqlConnection.Close();
             }
         }
-
-
-
     }
 }

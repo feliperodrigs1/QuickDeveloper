@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace QuickDeveloper.Models {
-    public class Model_User {
+namespace QuickDeveloper.Models 
+{
+    public class Model_User 
+    {
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

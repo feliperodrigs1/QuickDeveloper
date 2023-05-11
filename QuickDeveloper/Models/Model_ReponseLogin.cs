@@ -4,7 +4,6 @@
     {
         public string message { get; set; }
 
-        public string metadata { get; set; }
-        
+        public string metadata { get; set; } 
     }
 }
