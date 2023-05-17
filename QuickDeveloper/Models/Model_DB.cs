@@ -49,7 +49,11 @@ namespace QuickDeveloper.Models
             catch(Exception ex)
             {
                 throw new Exception(ex.Message);                
-            }            
+            }      
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
+            }      
         }
         
         public static Model_View_User UserRequisition(string email)
@@ -74,6 +78,10 @@ namespace QuickDeveloper.Models
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
             }
         }
 
@@ -103,6 +111,10 @@ namespace QuickDeveloper.Models
             {
                 throw new Exception(ex.Message);
             }
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
+            }
         }
 
         public static void UpdateData_User(Model_View_User datauser)
@@ -131,6 +143,10 @@ namespace QuickDeveloper.Models
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                Model_DB.Instance.sqlConnection.Close();
             }
         }
 
