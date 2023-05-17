@@ -86,8 +86,7 @@ tr:hover:not(.bg-table) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
-    justify-content: space-evenly;
+    padding: 1rem 2rem;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -100,6 +99,7 @@ tr:hover:not(.bg-table) {
     width: auto;
     max-width: 95%;
     overflow-y: auto;
+    overflow-x: auto;
     bottom: auto;
 }
 

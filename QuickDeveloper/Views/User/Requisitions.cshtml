@@ -8,12 +8,9 @@
     ViewData["Title"] = "Requisitions | QuickDeveloper";
     var token = context.HttpContext.Request.Cookies["token"];
 
-    if (AuthenticateController.Instance.claimsPrincipal == null)
-    {
-        TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
-        var tokenHandler = new JwtSecurityTokenHandler();
-        AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
-    }
+    TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
+    var tokenHandler = new JwtSecurityTokenHandler();
+    AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
 
     var user = AuthenticateController.Instance.claimsPrincipal.FindFirst("id").Value;
     var role = AuthenticateController.Instance.claimsPrincipal.FindFirst(ClaimTypes.Role).Value.ToUpper();
