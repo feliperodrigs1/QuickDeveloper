@@ -3,8 +3,7 @@ using Newtonsoft.Json;
 using QuickDeveloper.Models;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-
+using System.Globalization;
 
 namespace QuickDeveloper.Controllers
 {
@@ -79,6 +78,9 @@ namespace QuickDeveloper.Controllers
         public async Task<IActionResult> SignUp(Model_User user, IFormCollection form)
         {
             TempData["User"] = JsonConvert.SerializeObject(user);
+
+            DateTime dateTime = DateTime.ParseExact(user.Birthdate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            user.Birthdate = dateTime.ToString("yyyy-MM-ddTHH:mm:ss");
 
             bool dev = !string.IsNullOrEmpty(form["dev"]);
 
