@@ -51,15 +51,16 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" asp-for="Password" placeholder="Senha" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@@#$%^&*]).{5,}" required />
+                        <input type="password" asp-for="Password" id="input-password" placeholder="Senha" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@@#$%^&*]).{5,}" required />
                     </div>
                     <ul>
-                        <li> Letra maiúscula </li>
-                        <li> Letra minúscula </li>
-                        <li> Número </li>
-                        <li> Símbolos (@@#$%^&+=) </li>
+                        <li id="upkey"> Letra maiúscula </li>
+                        <li id="lowerkey"> Letra minúscula </li>
+                        <li id="number"> Número </li>
+                        <li id="symbol"> Símbolos (!@@#$%^&+=) </li>
+                        <li id="size"> Comprimento mínimo de 5 caracteres </li>
                     </ul>
-                    <br>
+                    <br>    
                     <div>
                        <input type="checkbox" class="form-check-input" id="dev" name="dev" value="dev"/>
                         <label for="">Fazer cadastro como Desenvolvedor</label>

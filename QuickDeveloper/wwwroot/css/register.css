@@ -379,3 +379,7 @@ ul li {
         left: 50%;
     }
 }
+
+.hidden {
+    display: none;
+}
