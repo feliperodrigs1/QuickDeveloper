@@ -42,8 +42,6 @@ namespace QuickDeveloper.Models
 
                 Convert.ToInt32(result);
 
-                Model_DB.Instance.sqlConnection.Close();
-
                 return true;
             }
             catch(Exception ex)
@@ -70,8 +68,6 @@ namespace QuickDeveloper.Models
                 parameters.Add("@EMAIL", email);
 
                 var user = Instance.sqlConnection.Query<Model_View_User>("spSLN_FindUserByEmail", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
-
-                Instance.sqlConnection.Close();
 
                 return user;
             }
@@ -102,10 +98,7 @@ namespace QuickDeveloper.Models
 
                 var user = Model_DB.Instance.sqlConnection.Query<Model_View_User>("spSLN_ShowUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
-                Model_DB.Instance.sqlConnection.Close();                
-
                 return (Model_View_User)user;
-
             }
             catch(Exception ex)
             {
@@ -135,8 +128,6 @@ namespace QuickDeveloper.Models
 
 
                 var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_AlterUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
-
-                Model_DB.Instance.sqlConnection.Close();
 
                 Convert.ToInt32(result);
             }
