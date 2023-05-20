@@ -5,10 +5,15 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
 @{
     ViewData["Title"] = "ChatBot | QuickDeveloper";
+    var token = context.HttpContext.Request.Cookies["token"];
 
-    var username = AuthenticateController.Instance.claimsPrincipal.FindFirst("Username").Value;
-    
+    TokenValidationParameters validationParameters = AuthenticateController.Instance.ValidationParameters();
+    var tokenHandler = new JwtSecurityTokenHandler();
+    AuthenticateController.Instance.claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+
+    var username = AuthenticateController.Instance.claimsPrincipal.FindFirst("Username").Value;    
 }
+    
 <link rel="stylesheet" href="/css/index.css" asp-append-version="true" />
 <link rel="stylesheet" href="/css/ChatBot.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

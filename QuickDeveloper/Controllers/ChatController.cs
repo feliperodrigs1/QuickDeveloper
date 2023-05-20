@@ -9,8 +9,6 @@ namespace QuickDeveloper.Controllers {
 
         public IActionResult ChatBot() 
         {
-            var jwt = Request.Cookies["token"]?.ToString();
-
             if (!AuthenticateController.VerifyUser(Request, "Regular")) 
             {
                 return RedirectToAction("SignIn", "Register", routePost);

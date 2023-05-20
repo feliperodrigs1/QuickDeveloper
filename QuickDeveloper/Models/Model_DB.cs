@@ -26,9 +26,9 @@ namespace QuickDeveloper.Models
         {
             try
             {
-                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                if (Instance.sqlConnection.State != ConnectionState.Open)
                 {
-                    Model_DB.Instance.sqlConnection.Open();
+                    Instance.sqlConnection.Open();
                 }
                 
                 var parameters = new DynamicParameters();
@@ -38,7 +38,7 @@ namespace QuickDeveloper.Models
                 parameters.Add("@IDREQUISITION", requisition.idRequisition);
                 parameters.Add("@DESCRIPTION", requisition.description);
 
-                var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_InsertUpdateRequisition", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
+                var result = Instance.sqlConnection.Query<int>("spSLN_InsertUpdateRequisition", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
                 Convert.ToInt32(result);
 
@@ -50,7 +50,7 @@ namespace QuickDeveloper.Models
             }      
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
+                Instance.sqlConnection.Close();
             }      
         }
         
@@ -77,7 +77,7 @@ namespace QuickDeveloper.Models
             }
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
+                Instance.sqlConnection.Close();
             }
         }
 
@@ -87,18 +87,18 @@ namespace QuickDeveloper.Models
             {
                 int id = Convert.ToInt32(IdUser);
 
-                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                if (Instance.sqlConnection.State != ConnectionState.Open)
                 {
-                    Model_DB.Instance.sqlConnection.Open();
+                    Instance.sqlConnection.Open();
                 }
 
                 var parameters = new DynamicParameters();            
 
                 parameters.Add("@IDUSER", IdUser);
 
-                var user = Model_DB.Instance.sqlConnection.Query<Model_View_User>("spSLN_ShowUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
+                var user = Instance.sqlConnection.Query<Model_View_User>("spSLN_ShowUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
-                return (Model_View_User)user;
+                return user;
             }
             catch(Exception ex)
             {
@@ -106,7 +106,7 @@ namespace QuickDeveloper.Models
             }
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
+                Instance.sqlConnection.Close();
             }
         }
 
@@ -114,9 +114,9 @@ namespace QuickDeveloper.Models
         {
             try
             {
-                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                if (Instance.sqlConnection.State != ConnectionState.Open)
                 {
-                    Model_DB.Instance.sqlConnection.Open();
+                    Instance.sqlConnection.Open();
                 }
                 var parameters = new DynamicParameters();
                 
@@ -127,7 +127,7 @@ namespace QuickDeveloper.Models
                 parameters.Add("@BIRTHDATE", datauser.Birthdate);
 
 
-                var result = Model_DB.Instance.sqlConnection.Query<int>("spSLN_AlterUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
+                var result = Instance.sqlConnection.Query<int>("spSLN_AlterUser", parameters, commandType: CommandType.StoredProcedure).ToList()[0];
 
                 Convert.ToInt32(result);
             }
@@ -137,7 +137,7 @@ namespace QuickDeveloper.Models
             }
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
+                Instance.sqlConnection.Close();
             }
         }
 
@@ -147,9 +147,9 @@ namespace QuickDeveloper.Models
             {
                 int id = Convert.ToInt32(IdUser);
 
-                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                if (Instance.sqlConnection.State != System.Data.ConnectionState.Open)
                 {
-                    Model_DB.Instance.sqlConnection.Open();
+                    Instance.sqlConnection.Open();
                 }
                     
                 var parameters = new DynamicParameters();
@@ -157,9 +157,9 @@ namespace QuickDeveloper.Models
                 parameters.Add("@IDUSER", id);
                 parameters.Add("@ROLE", role.ToUpper());
 
-                var result = Model_DB.Instance.sqlConnection.Query<Model_Requisition>("spSLN_ShowRequisition", parameters, commandType: CommandType.StoredProcedure).ToList();
-                
-                return (List<Model_Requisition>)result;
+                var result = Instance.sqlConnection.Query<Model_Requisition>("spSLN_ShowRequisition", parameters, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -167,26 +167,26 @@ namespace QuickDeveloper.Models
             }
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
-            }
+                Instance.sqlConnection.Close();
+            }            
         }
 
         public static List<Model_View_User_Competences> UserByCompetence(string competences)
         {
             try
             {
-                if (Model_DB.Instance.sqlConnection.State != System.Data.ConnectionState.Open)
+                if (Instance.sqlConnection.State != System.Data.ConnectionState.Open)
                 {
-                    Model_DB.Instance.sqlConnection.Open();
+                    Instance.sqlConnection.Open();
                 }
 
                 var parameters = new DynamicParameters();
 
                 parameters.Add("@COMPETENCES", competences.Replace('e',',').Replace('.',' ').ToUpper().Trim());
 
-                var result = Model_DB.Instance.sqlConnection.Query<Model_View_User_Competences>("spSLN_FindUser_by_Competence", parameters, commandType: CommandType.StoredProcedure).ToList();
+                var result = Instance.sqlConnection.Query<Model_View_User_Competences>("spSLN_FindUser_by_Competence", parameters, commandType: CommandType.StoredProcedure).ToList();
 
-                return (List<Model_View_User_Competences>)result;
+                return result;
             }
             catch (Exception ex)
             {
@@ -194,7 +194,7 @@ namespace QuickDeveloper.Models
             }
             finally
             {
-                Model_DB.Instance.sqlConnection.Close();
+                Instance.sqlConnection.Close();
             }
         }
     }

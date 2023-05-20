@@ -1,5 +1,23 @@
-﻿<div style="display: flex; justify-content: center; align-items: center; height: 80vh; text-align: center;">
-    <div style="display: inline-block; background-color: #ccc; padding: 20px; border-radius: 5px;">
+﻿<style>
+    .container-redirect {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        text-align: center;
+    }
+
+    .content-redirect {
+        display: inline-block;
+        background-color: #ccc;
+        padding: 20px;
+        border-radius: 5px;
+    }
+</style>
+
+
+<div class="container-redirect">
+    <div class="content-redirect">
         <p>Conta verificada com sucesso!</p>
         <p id="timer"></p>
     </div>
@@ -17,5 +35,5 @@
         }
     }
 
-    setInterval(updateTime, 1500);
+    setInterval(updateTime, 1000);
 </script>
